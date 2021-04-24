@@ -1,0 +1,25 @@
+<animated=false>//linia - 3 pt index
+19
+ciment_jos:192,258,64,60,1
+ciment_stanga:69,128,54,64,1
+ciment_dreapta:321,128,62,64,1
+ciment_sus:193,0,62,64,1
+parchet_ros:128,128,64,64,0
+parchet_mov:512,640,64,64,0
+dirt:615,250,64,64,1
+pamant1:576,192,64,64,1
+pamant2:640,192,64,64,1
+cuie_sus:320,384,64,64,1
+ciment_rand:320,768,64,64,1
+steag:521,62,48,112,0
+stalp:0,0,64,64,0
+suport_stanga_sus:448,448,64,64,0
+suport_dreapta_sus:641,448,64,64,0
+cuie_jos:320,512,64,64,1
+lant:448,512,64,128,0
+tepi:576,320,64,64,1
+vas:1216,0,32,64,0
+// 9 background, 10 peste
+//scos din uz
+ciment_full:256,768,192,64
+steag_varf:512,128,64,64
