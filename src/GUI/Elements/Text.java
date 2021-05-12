@@ -34,4 +34,16 @@ public class Text extends UI_Elemenent{
     public void setTextColor(Color textColor) {
         this.textColor = textColor;
     }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }

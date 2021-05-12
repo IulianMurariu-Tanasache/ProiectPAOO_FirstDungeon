@@ -19,11 +19,13 @@ public abstract class GameState {
     protected static ArrayList<UI_Elemenent> MenuUI = new ArrayList<>();
     protected static ArrayList<UI_Elemenent> GameUI = new ArrayList<>();
     protected static ArrayList<UI_Elemenent> SettingsUI = new ArrayList<>();
+    protected static ArrayList<UI_Elemenent> LeaderboardUI = new ArrayList<>();
     private static GameState instance = null;
     private static boolean musicOn;
     private static boolean soundOn;
     private static boolean running;
     protected static boolean foundTreasure;
+    protected static int score;
 
     public static GameState getInstance() {
         return instance;
@@ -62,7 +64,7 @@ public abstract class GameState {
         MenuUI.add(idk);
 
         mouseInput.add(idk);
-        idk = new Button(window.getWidth() / 2 +40,300,150,70,"SCORE",new NothingCommand());
+        idk = new Button(window.getWidth() / 2 +40,300,150,70,"SCORE",new ToLeaderBoardCommand());
         idk.setTextColor(Color.WHITE);
         idk.setBackColor(new Color(11,132,80));
         MenuUI.add(idk);
@@ -140,9 +142,9 @@ public abstract class GameState {
         mouseInput.add(idk);
         GameUI.add(idk); //3
 
-        title = new Text(845,40, "Score: 0");
+        title = new Text(835,40, "Score: 0");
         title.setSize(35);
-        title.setTextColor(new Color(70,12,89));
+        title.setTextColor(new Color(11,132,80));
         GameUI.add(title); //4
 
         //setari UI
@@ -166,12 +168,39 @@ public abstract class GameState {
         mouseInput.add(idk);
         SettingsUI.add(idk);
 
+        //LeaderboardUI
+
+        try {
+            LeaderboardUI.add(new Imagine(0,0, window.getWidth(), window.getHeight(), new SpriteSheet("menuBack","")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }//0
+
+        idk = new Button(window.getWidth() / 2 - 75,450,150,70,"MENU", new ToMenuCommand());
+        idk.setTextColor(Color.WHITE);
+        idk.setBackColor(new Color(11,132,80));
+        mouseInput.add(idk);
+        LeaderboardUI.add(idk);//1
+
+        title = new Text(380,40, "Leaderboard");
+        title.setSize(45);
+        title.setTextColor(new Color(70,12,89));
+        LeaderboardUI.add(title); //2
+
+        ScorePanel scorePanou = new ScorePanel(0,100,1024,340);
+        LeaderboardUI.add(scorePanou); //3
+
+        title = new Text(130,80, "The goal is to achieve the smallest score possible.");
+        title.setSize(25);
+        title.setTextColor(new Color(70,12,89));
+        LeaderboardUI.add(title); //2
+
         instance = new MenuState();
         instance.init();
     }
 
     public abstract void init();
-    public abstract void render(Graphics g, double elapsed);
+    public abstract void render(Graphics g);
     public abstract void tick();
     public abstract void clearUI();
 
@@ -225,5 +254,13 @@ public abstract class GameState {
 
     public static void setFoundTreasure(boolean foundTreasure) {
         GameState.foundTreasure = foundTreasure;
+    }
+
+    public static int getScore() {
+        return score;
+    }
+
+    public static void setScore(int score) {
+        GameState.score = score;
     }
 }

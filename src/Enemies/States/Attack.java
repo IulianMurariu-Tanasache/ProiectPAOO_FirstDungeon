@@ -19,7 +19,7 @@ public class Attack extends EnemyState{
     public EnemyState update(Rectangle playerBounds) {
 
         int x = thisEnemy.getX();
-        if(!(((playerBounds.x >= x - distanceToAttack && playerBounds.x < x) || (playerBounds.x < x + 20 + distanceToAttack && playerBounds.x > x)) && (Math.abs(playerBounds.y + playerBounds.height - (thisEnemy.getY() + thisEnemy.getHeight())) < height) && (playerBounds.y < thisEnemy.getY() + thisEnemy.getHeight())))
+        if(!(((playerBounds.x >= x - distanceToAttack && playerBounds.x < x) || (playerBounds.x < x + thisEnemy.getWidth() + distanceToAttack && playerBounds.x > x)) && (Math.abs(playerBounds.y + playerBounds.height - (thisEnemy.getY() + thisEnemy.getHeight())) < height) && (playerBounds.y < thisEnemy.getY() + thisEnemy.getHeight())))
         {
             if (thisEnemy.getId() == ID.Enemy_Skeleton) {
                 thisEnemy.setCurrentAnimation(Enemy.skeleton_anim[animations_enemy_enum.walk]);
@@ -83,5 +83,7 @@ public class Attack extends EnemyState{
     public void init() {
         thisEnemy.setSpeedX(0);
         canAttack = false;
+        thisEnemy.setAttackTimer(80);
+        thisEnemy.setCurrentAnimation(null);
     }
 }

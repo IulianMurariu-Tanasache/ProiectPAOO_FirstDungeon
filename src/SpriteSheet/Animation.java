@@ -46,11 +46,11 @@ public class Animation{
         delta = 0;
     }
 
-    public BufferedImage getCurrentFrame(double elapsed, MutableBoolean in)
+    public BufferedImage getCurrentFrame(MutableBoolean in)
     {
         in.val = true;
         BufferedImage rez = frames[current];
-        delta += elapsed;
+        delta ++;
         if(delta > speed)
         {
             current++;

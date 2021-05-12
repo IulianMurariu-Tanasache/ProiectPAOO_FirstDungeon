@@ -57,11 +57,11 @@ public class Comoara extends GameObject{
     }
 
     @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
         BufferedImage img;
         if(inAnimation.val)
         {
-            img = animation.getCurrentFrame(elapsed, inAnimation);
+            img = animation.getCurrentFrame(inAnimation);
             g.setColor(new Color(40,40,40,100));
             g.fillRect(0,0,Window.getInstance().getWidth(), Window.getInstance().getHeight());
         }

@@ -16,4 +16,7 @@ public abstract class EnemyState  {
     public abstract EnemyState update(Rectangle playerBounds);
     public abstract void init();
 
+    public static int getDistanceToPatrol() {
+        return distanceToPatrol;
+    }
 }

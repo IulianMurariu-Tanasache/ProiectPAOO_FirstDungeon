@@ -16,7 +16,7 @@ public class Ciuperca extends Enemy{
         width = (int) (40 * scale);
     }
 
-    @Override
+    /*@Override
     public void tick() {
         state = state.update(playerBounds);
 
@@ -26,20 +26,20 @@ public class Ciuperca extends Enemy{
 
         if(attackTimer > 0)
             attackTimer--;
-    }
+    }*/
 
 
     @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
         if(currentAnimation != null)
-            img = currentAnimation.getCurrentFrame(elapsed, inAnimation);
+            img = currentAnimation.getCurrentFrame(inAnimation);
         else
             img = ciuperca_anim[0].getImage(0);
         if(!facing)
             g.drawImage(img, (int) (x + 10 * scale + img.getWidth() * scale), y, (int)(img.getWidth() * scale * -1), (int)(img.getHeight() * scale), null);
         else
             g.drawImage(img, x, y, (int)(img.getWidth() * scale), (int)(img.getHeight() * scale), null);
-        g.drawRect((int)(x +10 * scale), (int)(y + 10 * scale), width, height);
+        //g.drawRect((int)(x +10 * scale), (int)(y + 10 * scale), width, height);
     }
 
     @Override

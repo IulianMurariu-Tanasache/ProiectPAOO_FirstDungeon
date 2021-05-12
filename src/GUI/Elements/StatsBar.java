@@ -1,6 +1,5 @@
 package GUI.Elements;
 
-import Observer.Observer;
 import Player.Player;
 import SpriteSheet.SpriteSheet;
 
@@ -8,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class StatsBar extends UI_Elemenent implements Observer {
+public class StatsBar extends UI_Elemenent {
 
     //in vector: 0-plin, 1-jumate, 2-gol
     private BufferedImage[] inima;
@@ -35,6 +34,9 @@ public class StatsBar extends UI_Elemenent implements Observer {
         if(!visible)
             return;
         BufferedImage[] toDraw = new BufferedImage[]{inima[2],inima[2],inima[2]};
+        Player player = Player.getInstance();
+        this.health = player.getHealth();
+        this.energy = player.getStamina();
         if(health == 1)
             toDraw[0] = inima[1];
         else if(health > 1){
@@ -71,12 +73,5 @@ public class StatsBar extends UI_Elemenent implements Observer {
 
         for(int i = 0; i < 3; i++)
             g.drawImage(toDraw[i], rect.x + (toDraw[i].getWidth() * 3 + 7) * i, rect.y + inima[0].getHeight()*3 + 10, toDraw[i].getWidth() * 3, toDraw[i].getHeight() * 3,null);
-    }
-
-
-    @Override
-    public void updateObserver(Player player) {
-        this.health = player.getHealth();
-        this.energy = player.getStamina();
     }
 }

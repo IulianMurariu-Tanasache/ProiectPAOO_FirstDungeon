@@ -1,8 +1,6 @@
 package GameObject;
 
 import Dungeon.Dungeon;
-import Game.Window;
-import Observer.Observer;
 import Player.Player;
 import SpriteSheet.SpriteSheet;
 
@@ -10,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Inima extends GameObject implements Observer {
+public class Inima extends GameObject {
 
     private BufferedImage img;
 
@@ -25,20 +23,17 @@ public class Inima extends GameObject implements Observer {
     }
 
     @Override
-    public void updateObserver(Player player) {
+    public void tick() {
+        Player player = Player.getInstance();
         Rectangle playerBounds = player.getBounds();
-        if(playerBounds.intersects(getBounds())) {
+        if(playerBounds.intersects(getBounds()) && Player.getInstance().getHealth() < 6) {
             Dungeon.getInstance().getRoom().remove(this);
             player.setHealth(player.getHealth() + 2);
         }
     }
 
     @Override
-    public void tick() {
-    }
-
-    @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
         g.drawImage(img, x, y, (int)(img.getWidth() * scale), (int)(img.getHeight() * scale), null);
     }
 
@@ -49,6 +44,6 @@ public class Inima extends GameObject implements Observer {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,img.getWidth(),img.getHeight());
+        return new Rectangle(x,y,(int)(img.getWidth() * scale), (int)(img.getHeight() * scale));
     }
 }

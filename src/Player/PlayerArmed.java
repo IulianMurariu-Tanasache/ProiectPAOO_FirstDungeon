@@ -4,10 +4,8 @@ import ChestiiRandom.MutableBoolean;
 import Dungeon.Dungeon;
 import Game.Window;
 import GameObject.ID;
-import Player.States.Fall;
-import Player.States.Idle;
-import Player.States.Jump;
-import Player.States.PlayerState;
+import GameStates.GameState;
+import Player.States.*;
 import Room.Room;
 import SpriteSheet.Animation;
 
@@ -52,10 +50,10 @@ public class PlayerArmed extends Player {
         timerDamageCuie = timerDamageCuieConstanta;
     }
 
-    @Override
+    /*@Override
     public Rectangle getBounds() {
         return new Rectangle(x, y, (int)(width * scale), (int)(height * scale));
-    }
+    }*/
 
 
     @Override
@@ -126,8 +124,7 @@ public class PlayerArmed extends Player {
                     {
                         updateRoom = false;
                         r = dungeon.getRoom();
-                        if(stamina < 6)
-                            stamina++;
+                        GameState.setScore(GameState.getScore() + 10);
                     }
                 }
                 tileBounds = r.getBoundsOfTile(i,j);
@@ -141,7 +138,7 @@ public class PlayerArmed extends Player {
                             if(timerDamageCuie >= timerDamageCuieConstanta)
                             {
                                 timerDamageCuie = 0;
-                                health--;
+                                setHealth(health - 1);
                             }
                         }
                         hit = true;
@@ -155,6 +152,12 @@ public class PlayerArmed extends Player {
                         }
                         playerBounds.y = this.y;
                         if (playerBounds.intersects(tileBounds)) {
+                            if(state instanceof Attack) {
+                                width = 22;
+                                height = 29;
+                                attacking = false;
+                                stamina++;
+                            }
                             state = PlayerState.getPrev();
                             state.init();
                             playerBounds = getBounds();
@@ -167,12 +170,6 @@ public class PlayerArmed extends Player {
             timerDamageCuie = timerDamageCuieConstanta;
         }
 
-    }
-
-
-    public void setHealth(int health) {
-        if(health > 0 && health < 7)
-            this.health = health;
     }
 }
 

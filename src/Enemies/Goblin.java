@@ -11,28 +11,14 @@ public class Goblin extends Enemy{
         super(x, y, scale, i);
         img = null;
         currentAnimation = new Animation(goblin_anim[animations_enemy_enum.walk]);
-        attackTimer = 0;
         height = (int) (36 * scale);
         width = (int) (38 * scale);
     }
 
-    /*@Override
-    public void tick() {
-        state = state.update(playerBounds);
-
-        mapCollision();
-
-        this.x += speedX;
-
-        if(attackTimer > 0)
-            attackTimer--;
-    }*/
-
-
     @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
         if(currentAnimation != null)
-            img = currentAnimation.getCurrentFrame(elapsed, inAnimation);
+            img = currentAnimation.getCurrentFrame(inAnimation);
         else
             img = goblin_anim[0].getImage(0);
         if(!facing)

@@ -23,4 +23,8 @@ public abstract class UI_Elemenent {
 
     public abstract void render(Graphics g);
 
+    public void setPosition(int x, int y){rect.x = x; rect.y = y;}
+
+    public Rectangle getRect(){return rect;}
+
 }

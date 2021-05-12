@@ -8,7 +8,7 @@ import Player.Player;
 import java.awt.*;
 
 
-public class GameDedState extends  GameState{
+public class GameDedState extends GameState{
 
     @Override
     public void init() {
@@ -17,17 +17,17 @@ public class GameDedState extends  GameState{
 
 
     @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
 
         g.clearRect(0,0,1024,576);
         g.setColor(new Color(75,44,54));
         g.fillRect(0,0,1024, 576);
 
         Dungeon.getInstance().getRoom().render(g);
-        Player.getInstance().render(g,0);
+        Player.getInstance().render(g);
 
         for(GameObject obj : Dungeon.getInstance().getRoom().getObjects())
-            obj.render(g,0);
+            obj.render(g);
 
         for(UI_Elemenent ui : GameUI)
             ui.render(g);

@@ -18,7 +18,7 @@ public class Follow extends EnemyState{
         {
             return new GoToStart(thisEnemy);
         }
-        if((((playerBounds.x >= x - distanceToAttack && playerBounds.x < x) || (playerBounds.x < x + 20 + distanceToAttack && playerBounds.x > x)) && (Math.abs(playerBounds.y + playerBounds.height - (thisEnemy.getY() + thisEnemy.getHeight())) < height) && (playerBounds.y < thisEnemy.getY() + thisEnemy.getHeight())))
+        if((((playerBounds.x >= x - distanceToAttack && playerBounds.x < x) || (playerBounds.x < x + thisEnemy.getWidth() + distanceToAttack && playerBounds.x > x)) && (Math.abs(playerBounds.y + playerBounds.height - (thisEnemy.getY() + thisEnemy.getHeight())) < height) && (playerBounds.y < thisEnemy.getY() + thisEnemy.getHeight())))
             return new Attack(thisEnemy);
         if(!thisEnemy.isNothingUnder()) {
             if (playerBounds.x < x) {

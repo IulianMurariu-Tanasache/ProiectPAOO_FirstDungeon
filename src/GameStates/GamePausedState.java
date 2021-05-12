@@ -2,13 +2,14 @@ package GameStates;
 
 import Dungeon.Dungeon;
 import GUI.Elements.UI_Elemenent;
+import Game.Window;
 import GameObject.GameObject;
 import Player.Player;
 
 import java.awt.*;
 
 
-public class GamePausedState extends  GameState{
+public class GamePausedState extends GameState{
 
     @Override
     public void init() {
@@ -17,17 +18,17 @@ public class GamePausedState extends  GameState{
 
 
     @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
 
-        g.clearRect(0,0,1024,576);
+        g.clearRect(0,0, Window.getInstance().getWidth(), Window.getInstance().getHeight());
         g.setColor(new Color(75,44,54));
-        g.fillRect(0,0,1024, 576);
+        g.fillRect(0,0,Window.getInstance().getWidth(), Window.getInstance().getHeight());
 
         Dungeon.getInstance().getRoom().render(g);
-        Player.getInstance().render(g,0);
+        Player.getInstance().render(g);
 
         for(GameObject obj : Dungeon.getInstance().getRoom().getObjects())
-            obj.render(g,0);
+            obj.render(g);
 
         for(UI_Elemenent ui : GameUI)
             ui.render(g);

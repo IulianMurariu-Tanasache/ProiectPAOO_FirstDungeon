@@ -116,7 +116,7 @@ public class Game extends Canvas implements Runnable {
             {
                 tick();
                 delta--;
-                render(1);
+                render();
             }
             frames++;
 
@@ -148,7 +148,7 @@ public class Game extends Canvas implements Runnable {
      * @param elapsed Timpul trecut intre 2 apelari consecutive ale functiei. Util in limitarea animatiilor.
      *
      */
-    private void render(double elapsed)
+    private void render()
     {
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null)
@@ -159,7 +159,7 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g  = bs.getDrawGraphics();
 
-        GameState.getInstance().render(g,elapsed);
+        GameState.getInstance().render(g);
 
         bs.show();
         g.dispose();

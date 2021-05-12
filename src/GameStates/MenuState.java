@@ -6,6 +6,8 @@ import GUI.Elements.UI_Elemenent;
 import Game.Window;
 import SoundTrack.Music;
 
+import javax.swing.*;
+
 public class MenuState extends GameState{
 
     @Override
@@ -17,9 +19,9 @@ public class MenuState extends GameState{
     }
 
     @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
 
-        g.clearRect(0,0,1024,576);
+        g.clearRect(0,0,Window.getInstance().getWidth(), Window.getInstance().getHeight());
         g.setColor(Color.PINK);
         g.fillRect(0,0,Window.getInstance().getWidth(), Window.getInstance().getHeight());
         for(UI_Elemenent ui : MenuUI)

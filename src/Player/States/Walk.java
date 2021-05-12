@@ -17,7 +17,7 @@ public class Walk extends PlayerState{
         else if(input.getKey(KeyEnum.SHIFT) && timerDash == 0 && player.getStamina() >= 2) {
             return new Dash();
         }
-        else if(input.getKey(KeyEnum.L) && player.isArmed()) {
+        else if(input.getKey(KeyEnum.L) && player.isArmed() && player.getStamina() >= 1) {
             return new Attack();
         }
         else if(input.getKey(KeyEnum.SPACE)) {

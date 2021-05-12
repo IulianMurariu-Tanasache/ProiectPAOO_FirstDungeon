@@ -6,8 +6,7 @@ import Enemies.States.EnemyState;
 import Enemies.States.Patrol;
 import Game.Window;
 import GameObject.GameObject;
-import GameObject.ID;
-import Observer.Observer;
+import GameObject.ID;;
 import Player.Player;
 import Room.Room;
 import SpriteSheet.Animation;
@@ -15,8 +14,9 @@ import SpriteSheet.Animation;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
-public abstract class Enemy extends GameObject implements Observer{
+public abstract class Enemy extends GameObject{
 
     protected Animation currentAnimation;
     protected MutableBoolean inAnimation;
@@ -65,8 +65,14 @@ public abstract class Enemy extends GameObject implements Observer{
 
     public Enemy(int x, int y, ID i) {
         super(x, y, i);
+        if(new Random().nextInt(2) == 0) {
+            facing = false;
+            x = x + EnemyState.getDistanceToPatrol();
+        }
+        else {
+            facing = true;
+        }
         startX = x;
-        facing = true;
         inAnimation = new MutableBoolean();
         health = 3;
         hitPlayer = false;
@@ -81,7 +87,7 @@ public abstract class Enemy extends GameObject implements Observer{
         this.scale = scale;
     }
 
-    public abstract void render(Graphics g, double elapsed);
+    public abstract void render(Graphics g);
 
     public int getStartX() {
         return startX;
@@ -89,6 +95,16 @@ public abstract class Enemy extends GameObject implements Observer{
 
     @Override
     public void tick() {
+        Player player = Player.getInstance();
+        playerBounds = player.getBounds();
+        if(playerBounds.intersects(getBounds()) && player.isAttacking())
+        {
+            health--;
+            player.setAttacking(false);
+        }
+        player.setGotHit(hitPlayer);
+        hitPlayer = false;
+
         if(health <= 0) {
             Dungeon.getInstance().getRoom().remove(this);
             return;
@@ -101,7 +117,6 @@ public abstract class Enemy extends GameObject implements Observer{
 
         if(attackTimer > 0)
             attackTimer--;
-
     }
 
     @Override
@@ -167,19 +182,6 @@ public abstract class Enemy extends GameObject implements Observer{
     }
 
     public EnemyState getState() { return state; }
-
-    @Override
-    public void updateObserver(Player player) {
-
-        playerBounds = player.getBounds();
-        if(playerBounds.intersects(getBounds()) && player.isAttacking())
-        {
-            health--;
-            player.setAttacking(false);
-        }
-        player.setGotHit(hitPlayer);
-        hitPlayer = false;
-    }
 
     public int getAttackTimer() {
         return attackTimer;

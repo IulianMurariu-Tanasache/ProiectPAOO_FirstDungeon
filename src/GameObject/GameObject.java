@@ -61,7 +61,7 @@ public abstract class GameObject {
         \param g Comopnenta de grafica. Necesara pentru functia de desenare.
         \param elapsed timpul trecut intre 2 render-uri consecutive. Necesar pentru limitarea animatiilor, unde e cazul.
      */
-    public abstract void render(Graphics g, double elapsed);
+    public abstract void render(Graphics g);
 
     /*! \fn public abstract void mapCollision(Room r)
         \brief Functia de coliziune cu harta. Trebuie implementata de orice obiect.
@@ -149,5 +149,9 @@ public abstract class GameObject {
 
     public ID getId() {
         return id;
+    }
+
+    public boolean isEnemy() {
+        return id == ID.Enemy_Eye || id == ID.Enemy_Goblin || id == ID.Enemy_Skeleton || id == ID.Enemy_Slime || id == ID.Enemy_Ciuperca;
     }
 }

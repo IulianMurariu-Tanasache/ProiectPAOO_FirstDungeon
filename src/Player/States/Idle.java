@@ -19,7 +19,7 @@ public class Idle extends PlayerState {
             prev = this;
             return new Dash();
         }
-        else if(input.getKey(KeyEnum.L) && player.isArmed()) {
+        else if(input.getKey(KeyEnum.L) && player.isArmed() && player.getStamina() >= 1) {
             return new Attack();
         }
         else if (input.getKey(KeyEnum.SPACE)) {

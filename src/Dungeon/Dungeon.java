@@ -2,6 +2,7 @@ package Dungeon;
 
 import GameObject.Comoara;
 import GameObject.ID;
+import Player.Player;
 import Room.*;
 import SpriteSheet.MapSheet;
 
@@ -77,7 +78,7 @@ public class Dungeon {
         }
 
         rooms[i][j] = new RoomInterior(0,2);
-        //rooms[i][j].add(new Comoara(896,375,0.9f, ID.Comoara));
+        rooms[i][j].add(new Comoara(896,375,0.9f, ID.Comoara));
 
         //tipuri de camera: 0 - stanga/dreapta; 1 - +jos; 2 - all; 3 - +sus
         //dir: 0 - jos, 1 - stanga, 2 - sus
@@ -131,7 +132,6 @@ public class Dungeon {
         out = new Room[2];
         out[0] = new RoomOutdoor (4);
         out[1] = new RoomOutdoor(5);
-        out[1].add(new Comoara(896,375,0.9f, ID.Comoara));
         outside = true;
         indexOut = 0;
         dimX++;
@@ -188,6 +188,9 @@ public class Dungeon {
             return false;
         }
         boolean end = false;
+        if(rooms[cRow][cColumn].isLocked()) {
+            return true;
+        }
         cRow += l;
         cColumn += c;
         if(cRow >= dimY){
@@ -207,6 +210,10 @@ public class Dungeon {
             outside = true;
             indexOut = 1;
             end = false;
+        }
+        if(!outside && Player.getInstance().isArmed() && rooms[cRow][cColumn].isToBeLocked()) {
+            rooms[cRow][cColumn].setToBeLocked(false);
+            rooms[cRow][cColumn].setLocked(true);
         }
         return end;
     }

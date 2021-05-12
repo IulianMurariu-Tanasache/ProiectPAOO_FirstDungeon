@@ -15,10 +15,10 @@ public class Imagine extends UI_Elemenent{
         visible = false;
     }
 
-    public Imagine(int x, int y, int w, int h,  SpriteSheet sheet) {
+    public Imagine(int x, int y, int w, int h, SpriteSheet sheet) {
         img = sheet.getImage();
         rect = new Rectangle(x,y,w,h);
-        visible = true;
+        visible = false;
     }
 
     @Override

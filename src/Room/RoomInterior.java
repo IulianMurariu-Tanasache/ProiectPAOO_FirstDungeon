@@ -1,7 +1,6 @@
 package Room;
 
-import Enemies.Goblin;
-import Enemies.Scheletron;
+import Enemies.*;
 import GameObject.ID;
 import GameObject.Inima;
 
@@ -14,6 +13,8 @@ import java.util.Random;
 public class RoomInterior extends Room{
 
     public RoomInterior(int type, int edge) throws IOException {
+        toBeLocked = false;
+        isLocked = false;
         objects = new ArrayList<>();
         this.type = type;
         Random rand = new Random();
@@ -22,6 +23,7 @@ public class RoomInterior extends Room{
         while(!br.readLine().equals("room:" + type))
             ;
         config = new int[2][dimY][dimX];
+        boolean inimaPeCamera = false;
         for(int i = 0 ; i < dimY; ++i) {
             String[] values = br.readLine().split("\\s+");
             for (int j = 0; j < dimX; ++j) {
@@ -48,12 +50,20 @@ public class RoomInterior extends Room{
                     switch (toSpawn) {
                         case 7 -> objects.add(new Scheletron((j-1) * 64 + 1, 64 * (i-1) - 22,1.6f, ID.Enemy_Skeleton));
                         case 11 -> objects.add(new Goblin((j-1)*64, 64*(i-1) + 1, 1.7f, ID.Enemy_Goblin));
+                        case 13 -> objects.add(new Ciuperca((j-1) * 64 + 1, 64 * (i-1) - 30,1.8f, ID.Enemy_Ciuperca));
+                        case 4 -> objects.add(new Slime((j-1)*64, 64*(i-1) + 7, 2.9f,ID.Enemy_Slime));
+                        case 5 -> objects.add(new Eye((j-1)*64, 64*(i-2) + 10, 1.5f,ID.Enemy_Eye));
                     }
 
                 }
-                if(i > 2 && j > 2 && j < dimX - 2 && (config[0][i][j] == 3 || config[1][i][j] == 10) && getBoundsOfTile(i - 1,j) == null && toSpawn == 5)
-                    objects.add(new Inima((j-1) * 64 + 1, 64 * (i-1) - 10,3f, ID.Inima));
-
+                if(i > 2 && j > 2 && j < dimX - 2 && getBoundsOfTile(i,j) == null && toSpawn == 5 && !inimaPeCamera)
+                {
+                    inimaPeCamera = true;
+                    objects.add(0,new Inima((j) * 64 + 1, 64 * (i) + 7, 3f, ID.Inima));
+                }
+                if(toSpawn == 1 && hasEnemies()) {
+                    toBeLocked = true;
+                }
             }
         }
         //margini

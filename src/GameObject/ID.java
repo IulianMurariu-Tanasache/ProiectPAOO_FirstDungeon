@@ -11,5 +11,6 @@ public enum ID {
     Enemy_Slime,
     Enemy_Ciuperca,
     Comoara,
+    bubble,
     Inima
 }

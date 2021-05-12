@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Panou extends UI_Elemenent{
 
-    private ArrayList<UI_Elemenent> elements = new ArrayList<>();
-    private Color backColor;
+    protected ArrayList<UI_Elemenent> elements = new ArrayList<>();
+    protected Color backColor;
 
     public Panou(int x, int y, int w, int h) {
         rect = new Rectangle(x,y,w,h);

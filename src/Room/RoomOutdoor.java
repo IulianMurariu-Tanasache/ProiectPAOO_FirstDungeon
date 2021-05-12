@@ -1,8 +1,6 @@
 package Room;
 
-import Enemies.*;
-import GameObject.ID;
-import GameObject.Inima;
+import GameObject.SpeechBubbles;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,18 +13,10 @@ import java.util.Random;
 public class RoomOutdoor extends Room{
 
     public RoomOutdoor(int type) throws IOException {
+        toBeLocked = false;
+        isLocked = false;
         objects = new ArrayList<>();
         this.type = type;
-        if(type == 5)
-        {
-            objects.add(new Ciuperca(200,356,1.8f, ID.Enemy_Ciuperca));
-            objects.add(new Slime(500,395,2.9f, ID.Enemy_Slime));
-        }
-        if(type == 4)
-        {
-            objects.add(new Eye(200,375,1.5f, ID.Enemy_Eye));
-            objects.add(new Inima(900,350,3, ID.Inima));
-        }
         Random rand = new Random();
         BufferedReader br = new BufferedReader(new FileReader("Assets/SpriteSheets/room.config"));
         while(!br.readLine().equals("room:" + type))
@@ -54,6 +44,16 @@ public class RoomOutdoor extends Room{
                     }
                 }
             }
+        }
+
+        if(type == 4) {
+            objects.add(new SpeechBubbles(20,320,300,100,0.32f,"Assets/SpeechBubbles/move_bubble.gif"));
+            objects.add(new SpeechBubbles(330,320,300,100,0.32f,"Assets/SpeechBubbles/jump_bubble.gif"));
+            objects.add(new SpeechBubbles(520,150,300,100,0.32f,"Assets/SpeechBubbles/stats_bubble.gif"));
+        }
+        if(type == 5) {
+            objects.add(new SpeechBubbles(50,320,300,100,0.32f,"Assets/SpeechBubbles/dash_bubble.gif"));
+            objects.add(new SpeechBubbles(430,320,400,100,0.32f,"Assets/SpeechBubbles/crouch_bubble.gif"));
         }
     }
 

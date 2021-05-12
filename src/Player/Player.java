@@ -7,7 +7,6 @@ import Game.Window;
 import GameObject.GameObject;
 import GameObject.ID;
 import GameStates.GameState;
-import Observer.Observer;
 import Player.States.Fall;
 import Player.States.Idle;
 import Player.States.Jump;
@@ -38,6 +37,8 @@ public class Player extends GameObject {
     protected final int timerDamageCuieConstanta = 80;
     protected boolean armed;
     protected boolean attacking = false;
+    protected int timerStaminaRegen;
+    protected final int timerStaminaRegenConstanta = 100;
 
     protected static Player instance = null;
 
@@ -66,6 +67,7 @@ public class Player extends GameObject {
         health = 6;
         stamina = 6;
         width = 22;
+        timerStaminaRegen = 0;
         gotHit = false;
         try {
             animations = new Animation[]{
@@ -94,7 +96,7 @@ public class Player extends GameObject {
 
         if(gotHit){
             gotHit = false;
-            health-=2;
+            setHealth(health - 2);
         }
 
         state = state.handleInput();
@@ -105,17 +107,18 @@ public class Player extends GameObject {
 
         PlayerState.timerPass();
 
-        statsBar.updateObserver(this);
-
-        for(GameObject obs : Dungeon.getInstance().getRoom().getObjects())
-            if(obs instanceof Observer)
-                ((Observer)obs).updateObserver(this);
+        if(stamina < 6)
+            timerStaminaRegen++;
+        if(timerStaminaRegen > timerStaminaRegenConstanta){
+            timerStaminaRegen = 0;
+            stamina++;
+        }
     }
 
     @Override
-    public void render(Graphics g, double elapsed) {
+    public void render(Graphics g) {
         if(currentAnimation != null)
-            img = currentAnimation.getCurrentFrame(elapsed, inAnimation);
+            img = currentAnimation.getCurrentFrame(inAnimation);
         else
             img = animations[animations_enum.death].getImage(3);
         if(!facing)
@@ -197,10 +200,9 @@ public class Player extends GameObject {
                    }
                    if(updateRoom)
                    {
+                        GameState.setScore(GameState.getScore() + 10);
                         updateRoom = false;
                         r = dungeon.getRoom();
-                        if(stamina < 6)
-                            stamina++;
                    }
                }
                tileBounds = r.getBoundsOfTile(i,j);
@@ -214,7 +216,7 @@ public class Player extends GameObject {
                            if(timerDamageCuie >= timerDamageCuieConstanta)
                            {
                                timerDamageCuie = 0;
-                               health--;
+                               setHealth(health - 1);
                            }
                        }
                        hit = true;
@@ -268,6 +270,7 @@ public class Player extends GameObject {
     }
 
     public void setStamina(int s) {
+        timerStaminaRegen = 0;
         stamina = s;
     }
 
@@ -277,8 +280,14 @@ public class Player extends GameObject {
     }
 
     public void setHealth(int health) {
-        if(health > 0 && health < 7)
+        if(health >= 0 && health < 7)
+        {
+            if(this.health > health)
+                GameState.setScore(GameState.getScore() + 20);
             this.health = health;
+        }
+        else if(health >= 7)
+            this.health = 6;
     }
 
     public void addStatsBar(StatsBar stats){

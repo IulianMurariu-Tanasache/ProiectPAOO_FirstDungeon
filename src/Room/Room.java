@@ -1,6 +1,8 @@
 package Room;
 
-import GameObject.GameObject;
+import Enemies.Enemy;
+import GameObject.*;
+import GameStates.GameState;
 import SpriteSheet.MapSheet;
 
 import javax.imageio.ImageIO;
@@ -22,6 +24,8 @@ public abstract class Room {
     protected static BufferedImage[] backOut = null;
     protected ArrayList<GameObject> objects;
     private Queue<GameObject> toRemove = new LinkedList<GameObject>();
+    protected boolean toBeLocked;
+    protected boolean isLocked;
 
     public static void loadBack() {
         if(backOut != null)
@@ -68,8 +72,12 @@ public abstract class Room {
         for(GameObject obj : objects)
             obj.tick();
         while(!toRemove.isEmpty()) {
+            if(toRemove.peek() instanceof Enemy)
+                GameState.setScore(GameState.getScore() - 5);
             objects.remove(toRemove.poll());
         }
+        if(isLocked && !hasEnemies())
+            isLocked = false;
     }
 
     public int getType() {
@@ -124,5 +132,28 @@ public abstract class Room {
         if(i < 0 || j < 0 || i >= dimY || j >= dimX)
             return null;
         return sheet.getTileByIndex(config[k][i][j]).getName();
+    }
+
+    public boolean hasEnemies() {
+        for(GameObject obj : objects)
+            if(obj.isEnemy())
+                return true;
+        return false;
+    }
+
+    public boolean isToBeLocked() {
+        return toBeLocked;
+    }
+
+    public void setToBeLocked(boolean toBeLocked) {
+        this.toBeLocked = toBeLocked;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
     }
 }

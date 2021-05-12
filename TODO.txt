@@ -1,19 +1,17 @@
 TO DO GAME:
--toti inamicii
--score
 -boss final
 -setari
--score leaderboard
 -sound effects
 -efecte visuale
 -continue/save/load + autosave?
 -dificultati diferite
--tepi si capcane mai interesante?
--camere cu usi ce se blocheaza?
+-usi ce se blocheaza
+-tutorial + poveste de inceput
+
 -parallax?
 
 
 BUGURI:
 -dash se termina prea repede uneori
 -muzica nu trece la urmatoarea??
--ochi are problene la atac de coliziune
+-saritura intre outdoor si indoor dau cu capu ma blochez, parca rezolvasem...
