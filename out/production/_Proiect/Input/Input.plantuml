@@ -28,7 +28,23 @@ title __INPUT's Class Diagram__\n
   }
   
 
+  namespace Input {
+    class Input.MouseListener {
+        - uiElements : ArrayList<Interactable>
+        + MouseListener()
+        + add()
+        + mouseClicked()
+        + mouseEntered()
+        + mouseExited()
+        + mousePressed()
+        + mouseReleased()
+        + remove()
+    }
+  }
+  
+
   Input.KeyInput -up-|> java.awt.event.KeyAdapter
+  Input.MouseListener .up.|> java.awt.event.MouseListener
 
 
 right footer

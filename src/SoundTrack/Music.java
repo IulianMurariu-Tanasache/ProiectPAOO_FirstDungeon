@@ -1,8 +1,6 @@
 package SoundTrack;
 
 import GameStates.GameState;
-import GameStates.MenuState;
-import GameStates.SettingsState;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -13,15 +11,14 @@ public class Music implements Runnable
     private final String[] clips;
     private static Music instace = null;
     private final Clip currentClip;
-    private int index = 1;
-    public static boolean changedState = false;
+    private int index = 0;
     private boolean started;
     private LineListener waiting;
 
     // constructor to initialize streams and clip
     private Music(String[] music_path)
-            throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException
+            throws
+            LineUnavailableException
     {
         waiting = new LineListener() {
             @Override
@@ -37,7 +34,7 @@ public class Music implements Runnable
         currentClip = AudioSystem.getClip();
         currentClip.addLineListener(waiting);
         started = false;
-        start();
+        //start();
     }
 
     public static Music getInstance(String[] path) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
@@ -48,20 +45,15 @@ public class Music implements Runnable
 
     public void start() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         AudioInputStream audioInputStream;
-        if(GameState.getInstance() instanceof MenuState || GameState.getInstance() instanceof SettingsState)
-            audioInputStream = AudioSystem.getAudioInputStream(
-                    new File(clips[0]).getAbsoluteFile());
-        else {
-            audioInputStream = AudioSystem.getAudioInputStream(
-                    new File(clips[index]).getAbsoluteFile());
-            ++index;
-            if(index >= clips.length)
-                index = 1;
-        }
+        audioInputStream = AudioSystem.getAudioInputStream(
+                new File(clips[index]).getAbsoluteFile());
+        ++index;
+        if(index >= clips.length)
+            index = 0;
         currentClip.open(audioInputStream);
         currentClip.setMicrosecondPosition(0);
         FloatControl gainControl = (FloatControl) currentClip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-12);
+        gainControl.setValue(-24);
         currentClip.start();
 
     }
@@ -89,16 +81,6 @@ public class Music implements Runnable
             }
             if(GameState.isMusicOn()){
                 if(!currentClip.isRunning() && !started) {
-                    try {
-                        started = true;
-                        start();
-                    } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if(changedState) {
-                    changedState = false;
-                    stop();
                     try {
                         started = true;
                         start();

@@ -1,19 +1,14 @@
 package GameStates;
 
-import java.awt.*;
-
 import GUI.Elements.UI_Elemenent;
 import Game.Window;
-import SoundTrack.Music;
 
-import javax.swing.*;
+import java.awt.*;
 
 public class MenuState extends GameState{
 
     @Override
     public void init() {
-        if((!(prev instanceof SettingsState)) && (!(prev instanceof MenuState)))
-            Music.changedState = true;
         for(UI_Elemenent ui : MenuUI)
             ui.setVisible(true);
     }

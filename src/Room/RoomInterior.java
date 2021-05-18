@@ -1,6 +1,8 @@
 package Room;
 
+import ChestiiRandom.ChestiiStatice;
 import Enemies.*;
+import GameObject.GameObject;
 import GameObject.ID;
 import GameObject.Inima;
 
@@ -11,6 +13,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class RoomInterior extends Room{
+
+    public RoomInterior(int type, boolean toLock, int[][][] con, ArrayList<GameObject> list) {
+        toBeLocked = toLock;
+        this.type = type;
+        config = con;
+        objects = list;
+    }
 
     public RoomInterior(int type, int edge) throws IOException {
         toBeLocked = false;
@@ -48,18 +57,18 @@ public class RoomInterior extends Room{
                 int toSpawn = new Random().nextInt(16);
                 if(i > 2 && j > 2 && j < dimX - 2 && (config[0][i][j-1] == 3 || config[1][i][j-1] == 10)  && (config[0][i][j] == 3 || config[1][i][j] == 10) && getBoundsOfTile(i - 1,j) == null && getBoundsOfTile(i - 1,j - 1) == null && getBoundsOfTile(i - 2,j) == null && getBoundsOfTile(i - 2,j - 1) == null) {
                     switch (toSpawn) {
-                        case 7 -> objects.add(new Scheletron((j-1) * 64 + 1, 64 * (i-1) - 22,1.6f, ID.Enemy_Skeleton));
-                        case 11 -> objects.add(new Goblin((j-1)*64, 64*(i-1) + 1, 1.7f, ID.Enemy_Goblin));
-                        case 13 -> objects.add(new Ciuperca((j-1) * 64 + 1, 64 * (i-1) - 30,1.8f, ID.Enemy_Ciuperca));
-                        case 4 -> objects.add(new Slime((j-1)*64, 64*(i-1) + 7, 2.9f,ID.Enemy_Slime));
-                        case 5 -> objects.add(new Eye((j-1)*64, 64*(i-2) + 10, 1.5f,ID.Enemy_Eye));
+                        case 7 -> objects.add(new Scheletron(((j-1)) * ChestiiStatice.tileDimension + 20, ChestiiStatice.tileDimension * (i-1) - 22,1.6f, ID.Enemy_Skeleton));
+                        case 11 -> objects.add(new Goblin((j-1)*ChestiiStatice.tileDimension +20, ChestiiStatice.tileDimension*(i-1) + 1, 1.7f, ID.Enemy_Goblin));
+                        case 13 -> objects.add(new Ciuperca((j-1) * ChestiiStatice.tileDimension + 20, ChestiiStatice.tileDimension * (i-1) - 30,1.8f, ID.Enemy_Ciuperca));
+                        case 4 -> objects.add(new Slime((j-1)*ChestiiStatice.tileDimension+20, ChestiiStatice.tileDimension*(i-1) + 7, 2.9f,ID.Enemy_Slime));
+                        case 5 -> objects.add(new Eye((j-1)*ChestiiStatice.tileDimension+20, ChestiiStatice.tileDimension*(i-2) + 10, 1.5f,ID.Enemy_Eye));
                     }
 
                 }
-                if(i > 2 && j > 2 && j < dimX - 2 && getBoundsOfTile(i,j) == null && toSpawn == 5 && !inimaPeCamera)
+                if(i > 2 && j > 2 && j < dimX - 2 && i < dimY - 2 && getBoundsOfTile(i,j) == null && toSpawn == 5 && !inimaPeCamera)
                 {
                     inimaPeCamera = true;
-                    objects.add(0,new Inima((j) * 64 + 1, 64 * (i) + 7, 3f, ID.Inima));
+                    objects.add(0,new Inima((j) * ChestiiStatice.tileDimension, ChestiiStatice.tileDimension * (i) + 5, 2.8f, ID.Inima));
                 }
                 if(toSpawn == 1 && hasEnemies()) {
                     toBeLocked = true;

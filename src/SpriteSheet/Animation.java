@@ -15,7 +15,6 @@ public class Animation{
     private double delta;
 
     public Animation(String sheet, String name, int speed) throws IOException {
-        //super(sheet, sheet);
         SpriteSheet s = new SpriteSheet(sheet, sheet);
         current = 0;
         //this.speed = 1000000000 / (double)speed;

@@ -1,5 +1,6 @@
 package Enemies;
 
+import ChestiiRandom.ChestiiStatice;
 import Dungeon.Dungeon;
 import Game.Window;
 import GameObject.ID;
@@ -35,14 +36,14 @@ public class Eye extends Enemy{
     public void mapCollision() {
         Dungeon dungeon = Dungeon.getInstance();
         Room r = dungeon.getRoom();
-        int startX = (this.x - 5) / 64 - 1;
-        int startY = this.y / 64 - 1;
+        int startX = (this.x - 5) / ChestiiStatice.tileDimension - 1;
+        int startY = this.y / ChestiiStatice.tileDimension - 1;
         if(startX < 0)
             startX = 0;
         if(startY < 0)
             startY = 0;
-        int endX = (this.x + 5 + width) / 64 + 1;
-        int endY = (this.y + height) / 64 + 1;
+        int endX = (this.x + 5 + width) / ChestiiStatice.tileDimension + 1;
+        int endY = (this.y + height) / ChestiiStatice.tileDimension + 1;
         if(endX >= r.getDimX())
             endX = r.getDimX() - 1;
         if(endY >= r.getDimY())

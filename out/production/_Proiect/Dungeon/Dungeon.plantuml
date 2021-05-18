@@ -13,8 +13,17 @@ title __DUNGEON's Class Diagram__\n
         - out : Room[]
         - outside : boolean
         - rooms : Room[][]
+        + Dungeon()
+        + getDimX()
+        + getDimY()
+        + getIndexOut()
         {static} + getInstance()
         + getRoom()
+        + getRooms()
+        + getcColumn()
+        + getcRow()
+        + isOutside()
+        {static} + load()
         {static} + newInstance()
         + nextRoom()
         - Dungeon()

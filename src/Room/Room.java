@@ -1,15 +1,15 @@
 package Room;
 
+import ChestiiRandom.ChestiiStatice;
 import Enemies.Enemy;
-import GameObject.*;
+import GameObject.GameObject;
 import GameStates.GameState;
+import Player.Player;
+import SoundTrack.SoundManager;
 import SpriteSheet.MapSheet;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -21,23 +21,10 @@ public abstract class Room {
     protected final int dimY = 9;
     protected int type;
     protected static MapSheet sheet;
-    protected static BufferedImage[] backOut = null;
     protected ArrayList<GameObject> objects;
     private Queue<GameObject> toRemove = new LinkedList<GameObject>();
     protected boolean toBeLocked;
     protected boolean isLocked;
-
-    public static void loadBack() {
-        if(backOut != null)
-            return;
-        backOut = new BufferedImage[2];
-        try {
-            backOut[0] = ImageIO.read(new File("Assets/SpriteSheets/Background_2.png"));
-            backOut[1] = ImageIO.read(new File("Assets/SpriteSheets/Background_1.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void render(Graphics g)
     {
@@ -47,22 +34,22 @@ public abstract class Room {
             for(int j = 0; j < dimX; ++j)
             {
                 imag = sheet.getTileByIndex(config[0][i][j]).getImg();
-                g.drawImage(imag, j * 64, i * 64, 64, 64, null);
+                g.drawImage(imag, j * ChestiiStatice.tileDimension, i * ChestiiStatice.tileDimension, ChestiiStatice.tileDimension, ChestiiStatice.tileDimension, null);
                 /*if(sheet.getTileByIndex(config[0][i][j]).isSolid())
                 {
                     Rectangle rect = sheet.getTileByIndex(config[0][i][j]).getBounds();
-                    g.drawRect(j * 64 + rect.x,i * 64 + rect.y,rect.width,rect.height);
+                    g.drawRect(j * ChestiiStatice.tileDimension + rect.x,i * ChestiiStatice.tileDimension + rect.y,rect.width,rect.height);
                 }*/
             }
         for(int i = 0; i < dimY; ++i)
             for(int j = 0; j < dimX; ++j)
                 if (config[1][i][j] != 0) {
                     imag = sheet.getTileByIndex(config[1][i][j]).getImg();
-                    g.drawImage(imag,j * 64,i * 64,null);
+                    g.drawImage(imag,j * ChestiiStatice.tileDimension,i * ChestiiStatice.tileDimension,null);
                     /*if(sheet.getTileByIndex(config[1][i][j]).isSolid())
                     {
                         Rectangle rect = sheet.getTileByIndex(config[1][i][j]).getBounds();
-                        g.drawRect(j * 64 + rect.x,i * 64 + rect.y,rect.width,rect.height);
+                        g.drawRect(j * ChestiiStatice.tileDimension + rect.x,i * ChestiiStatice.tileDimension + rect.y,rect.width,rect.height);
                     }*/
                 }
 
@@ -76,8 +63,25 @@ public abstract class Room {
                 GameState.setScore(GameState.getScore() - 5);
             objects.remove(toRemove.poll());
         }
+        if(isToBeLocked() && hasEnemies() && Player.getInstance().isArmed() && Player.getInstance().getX() < 900 && Player.getInstance().getX() > 100 && Player.getInstance().getY() < 500 && Player.getInstance().getY() > 100) {
+            toBeLocked = false;
+            isLocked = true;
+            SoundManager.getSoundManager().play("gate.wav");
+            config[1][3][0] = 19;
+            config[1][3][dimX - 1] = 19;
+            if(type == 2 || type == 3)
+                config[1][0][1] = 20;
+            if(type == 2 || type == 1)
+                config[1][dimY - 2][dimX - 5] = 20;
+        }
         if(isLocked && !hasEnemies())
+        {
             isLocked = false;
+            config[1][3][0] = 0;
+            config[1][3][dimX - 1] = 0;
+            config[1][0][1] = 0;
+            config[1][dimY - 2][dimX - 5] = 0;
+        }
     }
 
     public int getType() {
@@ -90,15 +94,15 @@ public abstract class Room {
             return null;
         if(sheet.getTileByIndex(config[0][i][j]).isSolid()) {
             Rectangle rect = new Rectangle(sheet.getTileByIndex(config[0][i][j]).getBounds());
-            rect.x += j * 64;
-            rect.y += i * 64;
+            rect.x += j * ChestiiStatice.tileDimension;
+            rect.y += i * ChestiiStatice.tileDimension;
             return rect;
         }
         if (config[1][i][j] != 0 && sheet.getTileByIndex(config[1][i][j]).isSolid())
         {
             Rectangle rect = new Rectangle(sheet.getTileByIndex(config[1][i][j]).getBounds());
-            rect.x += j * 64;
-            rect.y += i * 64;
+            rect.x += j * ChestiiStatice.tileDimension;
+            rect.y += i * ChestiiStatice.tileDimension;
             return rect;
         }
         return null;
@@ -155,5 +159,13 @@ public abstract class Room {
 
     public void setLocked(boolean locked) {
         isLocked = locked;
+    }
+
+    public int[][][] getConfig() {
+        return config;
+    }
+
+    public void setConfig(int[][][] config) {
+        this.config = config;
     }
 }

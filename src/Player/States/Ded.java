@@ -1,9 +1,9 @@
 package Player.States;
 
 import GameStates.GameDedState;
-import GameStates.GamePausedState;
 import GameStates.GameState;
-import Player.*;
+import Player.animations_enum;
+import SoundTrack.SoundManager;
 
 public class Ded extends PlayerState{
 
@@ -24,5 +24,6 @@ public class Ded extends PlayerState{
     public void init() {
         player.setCurrentAnimation(animations_enum.death);
         player.setSpeedX(0);
+        SoundManager.getSoundManager().play("ded.wav");
     }
 }

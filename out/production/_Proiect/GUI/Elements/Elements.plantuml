@@ -2,106 +2,154 @@
 
 title __ELEMENTS's Class Diagram__\n
 
-  namespace GUI {
-    namespace Elements {
-      class GUI.Elements.Button {
-          - backColor : Color
-          - img : BufferedImage
-          - text : String
-          - textColor : Color
-          + Button()
-          + mouseClicked()
-          + mouseEntered()
-          + mouseExited()
-          + mousePressed()
-          + mouseReleased()
-          + render()
-          + setBackColor()
-          + setImg()
-          + setTextColor()
-          - isMouseOn()
-      }
+  namespace GUI.Elements {
+    class GUI.Elements.Button {
+        - backColor : Color
+        - img : BufferedImage
+        - text : String
+        - textColor : Color
+        + Button()
+        + isMouseOn()
+        + mouseClicked()
+        + mouseReleased()
+        + render()
+        + setBackColor()
+        + setImg()
+        + setTextColor()
     }
   }
   
 
-  namespace GUI {
-    namespace Elements {
-      class GUI.Elements.Imagine {
-          - img : BufferedImage
-          + Imagine()
-          + Imagine()
-          + render()
-      }
+  namespace GUI.Elements {
+    class GUI.Elements.CheckBox {
+        - checked : boolean
+        - color : Color
+        - thickness : int
+        + CheckBox()
+        + getText()
+        + isChecked()
+        + isMouseOn()
+        + mouseClicked()
+        + mouseReleased()
+        + render()
+        + setChecked()
+        + setColor()
+        + setVisible()
     }
   }
   
 
-  namespace GUI {
-    namespace Elements {
-      class GUI.Elements.Panou {
-          - backColor : Color
-          - elements : ArrayList<UI_Elemenent>
-          + Panou()
-          + add()
-          + render()
-          + setBackColor()
-      }
+  namespace GUI.Elements {
+    class GUI.Elements.Imagine {
+        - img : BufferedImage
+        + Imagine()
+        + Imagine()
+        + render()
     }
   }
   
 
-  namespace GUI {
-    namespace Elements {
-      class GUI.Elements.StatsBar {
-          - energy : int
-          - health : int
-          - inima : BufferedImage[]
-          - stamina : BufferedImage[]
-          + StatsBar()
-          + render()
-          + updateObserver()
-      }
+  namespace GUI.Elements {
+    interface GUI.Elements.Interactable {
+        {abstract} + isMouseOn()
+        {abstract} + mouseClicked()
+        {abstract} + mouseReleased()
     }
   }
   
 
-  namespace GUI {
-    namespace Elements {
-      class GUI.Elements.Text {
-          - size : int
-          - text : String
-          - textColor : Color
-          + Text()
-          + render()
-          + setSize()
-          + setTextColor()
-      }
+  namespace GUI.Elements {
+    class GUI.Elements.MenuParallax {
+        - back1 : BufferedImage[]
+        - back2 : BufferedImage[]
+        - back3 : BufferedImage
+        - rect1 : Rectangle[]
+        - rect2 : Rectangle[]
+        + MenuParallax()
+        + render()
     }
   }
   
 
-  namespace GUI {
-    namespace Elements {
-      abstract class GUI.Elements.UI_Elemenent {
-          {static} # font : Font
-          # rect : Rectangle
-          # visible : boolean
-          + isVisible()
-          {abstract} + render()
-          {static} + setFont()
-          + setVisible()
-      }
+  namespace GUI.Elements {
+    class GUI.Elements.Panou {
+        # backColor : Color
+        # elements : ArrayList<UI_Elemenent>
+        + Panou()
+        + add()
+        + render()
+        + setBackColor()
+        + setVisible()
     }
   }
   
 
-  GUI.Elements.Button .up.|> java.awt.event.MouseListener
+  namespace GUI.Elements {
+    class GUI.Elements.ScorePanel {
+        - scores : int[]
+        - textlist : Text[]
+        + ScorePanel()
+        + render()
+        + setVisible()
+        + updateScore()
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.StatsBar {
+        - energy : int
+        - health : int
+        - inima : BufferedImage[]
+        - stamina : BufferedImage[]
+        + StatsBar()
+        + render()
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.Text {
+        - size : int
+        - text : String
+        - textColor : Color
+        + Text()
+        + getSize()
+        + getText()
+        + render()
+        + setSize()
+        + setText()
+        + setTextColor()
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    abstract class GUI.Elements.UI_Elemenent {
+        {static} # font : Font
+        # rect : Rectangle
+        # visible : boolean
+        + getRect()
+        + isVisible()
+        {abstract} + render()
+        {static} + setFont()
+        + setPosition()
+        + setVisible()
+    }
+  }
+  
+
+  GUI.Elements.Button .up.|> GUI.Elements.Interactable
   GUI.Elements.Button -up-|> GUI.Elements.UI_Elemenent
   GUI.Elements.Button o-- GUI.Commands.Command : command
+  GUI.Elements.CheckBox .up.|> GUI.Elements.Interactable
+  GUI.Elements.CheckBox -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.CheckBox o-- GUI.Commands.CheckBoxCommand : comand
+  GUI.Elements.CheckBox o-- GUI.Elements.Text : text
   GUI.Elements.Imagine -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.MenuParallax -up-|> GUI.Elements.UI_Elemenent
   GUI.Elements.Panou -up-|> GUI.Elements.UI_Elemenent
-  GUI.Elements.StatsBar .up.|> Observer.Observer
+  GUI.Elements.ScorePanel -up-|> GUI.Elements.Panou
   GUI.Elements.StatsBar -up-|> GUI.Elements.UI_Elemenent
   GUI.Elements.Text -up-|> GUI.Elements.UI_Elemenent
 

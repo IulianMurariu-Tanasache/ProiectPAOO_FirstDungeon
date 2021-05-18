@@ -1,6 +1,8 @@
 package GameObject;
 
+import GameStates.GameState;
 import Player.Player;
+import SoundTrack.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,16 +17,19 @@ public class SpeechBubbles extends GameObject{
         super(x,y,scale,ID.bubble);
         triggerZone = new Rectangle(x,y,w,h);
         gif = new ImageIcon(file);
-        triggered = true;
+        triggered = false;
     }
 
     public void tick() {
+        if(GameState.isFoundTreasure())
+            return;
         Rectangle playerBounds = Player.getInstance().getBounds();
-        if(playerBounds.intersects(triggerZone))
+        if(playerBounds.intersects(triggerZone) && !triggered)
         {
             triggered = true;
+            SoundManager.getSoundManager().play("Voice1.wav");
         }
-        else
+        else if(!playerBounds.intersects(triggerZone) && triggered)
         {
             triggered = false;
         }
@@ -41,6 +46,8 @@ public class SpeechBubbles extends GameObject{
     }
 
     public void render(Graphics g) {
+        if(GameState.isFoundTreasure())
+            return;
         Image img = gif.getImage();
         img = gif.getImage();
         if(!triggered)

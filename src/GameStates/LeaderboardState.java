@@ -1,6 +1,5 @@
 package GameStates;
 
-import GUI.Elements.Text;
 import GUI.Elements.UI_Elemenent;
 import Game.Window;
 

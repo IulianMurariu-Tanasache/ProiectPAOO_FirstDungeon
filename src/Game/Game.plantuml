@@ -4,7 +4,6 @@ title __GAME's Class Diagram__\n
 
   namespace Game {
     class Game.Game {
-        - game_thread : Thread
         - isRunning : boolean
         - music_thread : Thread
         + isRunning()
@@ -29,6 +28,7 @@ title __GAME's Class Diagram__\n
         + getHeight()
         {static} + getInstance()
         + getWidth()
+        + getWindow()
         {static} + setInstance()
         - Window()
     }

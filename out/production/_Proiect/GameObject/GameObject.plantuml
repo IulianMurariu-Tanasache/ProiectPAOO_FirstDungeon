@@ -37,6 +37,7 @@ title __GAMEOBJECT's Class Diagram__\n
           + getSpeedY()
           + getX()
           + getY()
+          + isEnemy()
           + isFacing()
           {abstract} + mapCollision()
           {abstract} + render()
@@ -60,7 +61,39 @@ title __GAMEOBJECT's Class Diagram__\n
         Enemy_Goblin
         Enemy_Skeleton
         Enemy_Slime
+        Inima
         Player
+        bubble
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace bject {
+      class GameObject.Inima {
+          - img : BufferedImage
+          + Inima()
+          + getBounds()
+          + mapCollision()
+          + render()
+          + tick()
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace bject {
+      class GameObject.SpeechBubbles {
+          - gif : ImageIcon
+          - triggerZone : Rectangle
+          - triggered : boolean
+          + SpeechBubbles()
+          + getBounds()
+          + mapCollision()
+          + render()
+          + tick()
       }
     }
   }
@@ -70,6 +103,8 @@ title __GAMEOBJECT's Class Diagram__\n
   GameObject.Comoara o-- SpriteSheet.Animation : animation
   GameObject.Comoara o-- ChestiiRandom.MutableBoolean : inAnimation
   GameObject.GameObject o-- GameObject.ID : id
+  GameObject.Inima -up-|> GameObject.GameObject
+  GameObject.SpeechBubbles -up-|> GameObject.GameObject
 
 
 right footer

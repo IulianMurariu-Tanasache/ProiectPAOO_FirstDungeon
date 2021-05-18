@@ -4,7 +4,41 @@ title __GAMESTATES's Class Diagram__\n
 
   namespace Game {
     namespace tates {
+      class GameStates.DiffSelectState {
+          + clearUI()
+          + init()
+          + render()
+          + tick()
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GameContinueState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GameDedState {
+          + GameDedState()
+          + clearUI()
+          + init()
+          + render()
+          + tick()
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
       class GameStates.GamePausedState {
+          + GamePausedState()
           + clearUI()
           + init()
           + render()
@@ -18,19 +52,62 @@ title __GAMESTATES's Class Diagram__\n
     namespace tates {
       abstract class GameStates.GameState {
           {static} # GameUI : ArrayList<UI_Elemenent>
+          {static} # LeaderboardUI : ArrayList<UI_Elemenent>
           {static} # MenuUI : ArrayList<UI_Elemenent>
+          {static} # SettingsUI : ArrayList<UI_Elemenent>
+          {static} # WinPanel : Panou
+          {static} # deathPanel : Panou
+          {static} # diff : int
+          {static} # diffPanel : Panou
+          {static} # foundTreasure : boolean
+          {static} # menuBack : MenuParallax
           {static} # next : GameState
+          {static} # pausedPanel : Panou
           {static} # prev : GameState
+          {static} # score : int
+          {static} # toLoad : boolean
           {static} - instance : GameState
+          {static} - musicOn : boolean
+          {static} - running : boolean
+          {static} - soundOn : boolean
           {abstract} + clearUI()
+          {static} + getDiff()
           {static} + getInstance()
+          {static} + getScore()
           {abstract} + init()
+          {static} + isFoundTreasure()
+          {static} + isMusicOn()
+          {static} + isRunning()
+          {static} + isSoundOn()
+          {static} + isToLoad()
+          {static} + load()
           + nextState()
           {static} + prevState()
           {abstract} + render()
+          {static} + setDiff()
+          {static} + setFoundTreasure()
           {static} + setInstance()
+          {static} + setMusicOn()
           {static} + setNext()
+          {static} + setRunning()
+          {static} + setScore()
+          {static} + setSoundOn()
+          {static} + setToLoad()
           {abstract} + tick()
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GameWinState {
+          - timer : int
+          - timerConst : int
+          + clearUI()
+          + init()
+          + render()
+          + tick()
       }
     }
   }
@@ -40,6 +117,19 @@ title __GAMESTATES's Class Diagram__\n
     namespace tates {
       class GameStates.GameplayState {
           + GameplayState()
+          + GameplayState()
+          + clearUI()
+          + init()
+          + render()
+          + tick()
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.LeaderboardState {
           + clearUI()
           + init()
           + render()
@@ -61,9 +151,27 @@ title __GAMESTATES's Class Diagram__\n
   }
   
 
-  GameStates.GamePausedState -up-|> GameStates.GameState
+  namespace Game {
+    namespace tates {
+      class GameStates.SettingsState {
+          + clearUI()
+          + init()
+          + render()
+          + tick()
+      }
+    }
+  }
+  
+
+  GameStates.DiffSelectState -up-|> GameStates.GameState
+  GameStates.GameDedState -up-|> GameStates.GameplayState
+  GameStates.GamePausedState -up-|> GameStates.GameplayState
+  GameStates.GameWinState -up-|> GameStates.GameState
   GameStates.GameplayState -up-|> GameStates.GameState
+  GameStates.GameplayState o-- GUI.Elements.Text : scoreText
+  GameStates.LeaderboardState -up-|> GameStates.GameState
   GameStates.MenuState -up-|> GameStates.GameState
+  GameStates.SettingsState -up-|> GameStates.GameState
 
 
 right footer

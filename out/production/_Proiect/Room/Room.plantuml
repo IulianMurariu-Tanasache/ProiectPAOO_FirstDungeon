@@ -4,29 +4,40 @@ title __ROOM's Class Diagram__\n
 
   namespace Room {
     abstract class Room.Room {
-        {static} # backOut : BufferedImage[]
         # config : int[][][]
         # dimX : int
         # dimY : int
+        # isLocked : boolean
         # objects : ArrayList<GameObject>
         {static} # sheet : MapSheet
+        # toBeLocked : boolean
         # type : int
+        - toRemove : Queue<GameObject>
         + add()
         + getBoundsOfTile()
+        + getConfig()
         + getDimX()
         + getDimY()
         + getObjects()
+        + getTilebyName()
         + getType()
-        {static} + loadBack()
+        + hasEnemies()
+        + isLocked()
+        + isToBeLocked()
         + remove()
         + render()
+        + setConfig()
+        + setLocked()
         {static} + setSheet()
+        + setToBeLocked()
+        + tick()
     }
   }
   
 
   namespace Room {
     class Room.RoomInterior {
+        + RoomInterior()
         + RoomInterior()
     }
   }

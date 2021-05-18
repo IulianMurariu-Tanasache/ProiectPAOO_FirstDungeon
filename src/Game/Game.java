@@ -4,7 +4,9 @@ import Enemies.Enemy;
 import GameStates.GameState;
 import Input.KeyInput;
 import Player.States.PlayerState;
+import SQLite.SQLite;
 import SoundTrack.Music;
+import SoundTrack.SoundManager;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -55,6 +57,8 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(keyInput);
         PlayerState.setInput(keyInput);
         Enemy.loadAnimations();
+        SoundManager.setSoundManager();
+        SQLite.setInstance();
         GameState.setInstance(this);
 
         start();
@@ -68,7 +72,7 @@ public class Game extends Canvas implements Runnable {
     {
         isRunning = true;
         try {
-            music_thread = new Thread(Music.getInstance(new String[]{"Assets/menu.wav","Assets/Small_Repetitive.wav","Assets/troll.wav"}));
+            music_thread = new Thread(Music.getInstance(new String[]{"Assets/40_1 .wav","Assets/40_1 (2).wav","Assets/40_1 (3).wav"}));
             music_thread.start();
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
@@ -82,11 +86,14 @@ public class Game extends Canvas implements Runnable {
     {
         isRunning = false;
         try{
+            Music.getInstance(null).stop();
             music_thread.join(500);
-        }catch(InterruptedException e)
+        }catch(InterruptedException | UnsupportedAudioFileException | LineUnavailableException | IOException e)
         {
             e.printStackTrace();
         }
+        SQLite.getInstance().saveSetari();
+        SQLite.getInstance().closeConnection();
         Window.getInstance().getWindow().dispose();
     }
 

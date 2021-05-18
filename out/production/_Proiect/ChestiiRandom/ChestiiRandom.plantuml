@@ -3,6 +3,17 @@
 title __CHESTIIRANDOM's Class Diagram__\n
 
   namespace ChestiiRandom {
+    class ChestiiRandom.ChestiiStatice {
+        {static} + gri_tare_inchis : Color
+        {static} + mov : Color
+        {static} + tileDimension : int
+        {static} + verzui : Color
+        {static} + visiniu : Color
+    }
+  }
+  
+
+  namespace ChestiiRandom {
     class ChestiiRandom.FunctiiStaticeRandom {
     }
   }

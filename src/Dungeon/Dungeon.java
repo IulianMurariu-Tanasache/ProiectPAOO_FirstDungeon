@@ -1,19 +1,28 @@
 package Dungeon;
 
-import GameObject.Comoara;
-import GameObject.ID;
-import Player.Player;
-import Room.*;
+import Enemies.Ciuperca;
+import Enemies.Eye;
+import Enemies.Scheletron;
+import Enemies.Slime;
+import GameObject.*;
+import GameStates.GameState;
+import GameStates.GameWinState;
+import Room.Room;
+import Room.RoomInterior;
+import Room.RoomOutdoor;
 import SpriteSheet.MapSheet;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Dungeon {
 
     private Room[][] rooms;
     private int dimX = 5;
-    private final int dimY = 5;
+    private int dimY = 5;
     private boolean outside;
     private Room[] out;
     private int indexOut;
@@ -21,9 +30,90 @@ public class Dungeon {
     private int cColumn;
     private static Dungeon instance = null;
 
+    public Dungeon() {
+
+    }
+
+    public static void load(ResultSet dungeonSet,ResultSet roomSet,ResultSet objectsSet, MapSheet map) {
+        try {
+            Room.setSheet(map);
+            instance = new Dungeon();
+            instance.dimX = dungeonSet.getInt("dimX");
+            instance.dimY = dungeonSet.getInt("dimY");
+            instance.outside = dungeonSet.getBoolean("outside");
+            instance.indexOut = dungeonSet.getInt("indexOut");
+            instance.cRow = dungeonSet.getInt("cRow");
+            instance.cColumn = dungeonSet.getInt("cColumn");
+            instance.out = new Room[2];
+            instance.out[0] = new RoomOutdoor (4);
+            instance.out[1] = new RoomOutdoor(5);
+            roomSet.next();
+            objectsSet.next();
+            instance.rooms = new Room[instance.dimY][instance.dimX];
+            for(int i = 0; i < instance.dimY; ++i)
+                for(int j = 0; j < instance.dimX; ++j) {
+                    int room = i * (instance.dimX) + j;
+                    while(room > objectsSet.getInt("whatRoom"))
+                        objectsSet.next();
+                    if(room == roomSet.getInt("whatRoom")) {
+                        String[] con = roomSet.getString("conf").split(",");
+                        int[][][] conf = new int[2][9][16];
+                        for (int q = 0; q < 9; ++q) {
+                            for (int k = 0; k < 16; ++k) {
+                                String[] temp = con[q * 16 + k].split(" ");
+                                conf[0][q][k] = Integer.parseInt(temp[0]);
+                                conf[1][q][k] = Integer.parseInt(temp[1]);
+                            }
+                        }
+
+                        ArrayList<GameObject> objList = new ArrayList<GameObject>();
+                        try{
+                            while(objectsSet.getInt("whatRoom") == room) {
+                                switch (objectsSet.getInt("id")) {
+                                    case 5://ciuperca
+                                        objList.add(new Ciuperca(objectsSet.getInt("startX"), objectsSet.getInt("y"), 1.8f, ID.Enemy_Ciuperca));
+                                        break;
+                                    case 3://eye
+                                        objList.add(new Eye(objectsSet.getInt("startX"), objectsSet.getInt("y"), 1.5f, ID.Enemy_Eye));
+                                        break;
+                                    case 2://goblin
+                                        objList.add(new Eye(objectsSet.getInt("startX"), objectsSet.getInt("y"), 1.7f, ID.Enemy_Goblin));
+                                        break;
+                                    case 4://slime
+                                        objList.add(new Slime(objectsSet.getInt("startX"), objectsSet.getInt("y"), 2.9f, ID.Enemy_Slime));
+                                        break;
+                                    case 1://skeleton
+                                        objList.add(new Scheletron(objectsSet.getInt("startX"), objectsSet.getInt("y"), 1.6f, ID.Enemy_Skeleton));
+                                        break;
+                                    case 6://comoara
+                                        objList.add(new Comoara(objectsSet.getInt("startX"), objectsSet.getInt("y"), 0.9f, ID.Comoara));
+                                        break;
+                                    case 8://inima
+                                        objList.add(new Inima(objectsSet.getInt("startX"), objectsSet.getInt("y"), 2.8f, ID.Inima));
+                                        break;
+                                }
+                                objectsSet.next();
+                            }
+                        } catch(SQLException e) {
+                            System.out.println("ObjectsList done!");
+                        } finally {
+                            instance.rooms[i][j] = new RoomInterior(roomSet.getInt("type"),roomSet.getBoolean("toBeLocked"), conf, objList);
+                            roomSet.next();
+                        }
+                    }
+                }
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     private Dungeon(MapSheet map) throws IOException {
         Room.setSheet(map);
-        Room.loadBack();
+
+        if(GameState.getDiff() == 1) {
+            dimX = 7;
+            dimY = 7;
+        }
 
         int i;
         int j = 0;
@@ -56,17 +146,23 @@ public class Dungeon {
                 i++;
                 if(i == dimY - 1)
                     tip = 3;
-                else if (oldtip == 1 || oldtip == 2)
+                else
                     tip = rand.nextInt(2) + 2;
-                rooms[i][j] = new RoomInterior(tip,0);
             } else {
                 i--;
                 if(i == 0)
                     tip = 1;
-                else if(oldtip == 2 || oldtip == 3)
+                else
                     tip = rand.nextInt(2) + 1;
                 rooms[i][j] = new RoomInterior(tip,0);
             }
+
+            if(j == dimX - 1)
+                rooms[i][j] = new RoomInterior(tip, 2);
+            else if(j == 0)
+                rooms[i][j] = new RoomInterior(tip, 1);
+            else
+                rooms[i][j] = new RoomInterior(tip, 0);
 
             oldtip = tip;
             //olddir e inversul lui dir
@@ -77,8 +173,10 @@ public class Dungeon {
             }
         }
 
+        rooms[i][j - 1] = new RoomInterior(tip, 0);
         rooms[i][j] = new RoomInterior(0,2);
         rooms[i][j].add(new Comoara(896,375,0.9f, ID.Comoara));
+        System.out.println(i + " " + j);
 
         //tipuri de camera: 0 - stanga/dreapta; 1 - +jos; 2 - all; 3 - +sus
         //dir: 0 - jos, 1 - stanga, 2 - sus
@@ -114,7 +212,7 @@ public class Dungeon {
                     else {
                         if((rooms[i+1][j] != null && (rooms[i+1][j].getType() == 3 || rooms[i+1][j].getType() == 2)) && (rooms[i-1][j].getType() == 1 || rooms[i-1][j].getType() == 2))
                             tip = 2;
-                        else if(rooms[i+1][j] != null && (rooms[i+1][j].getType() == 3 || rooms[i+1][j].getType() == 2))
+                        else if(rooms[i+1][j] != null && (rooms[i+1][j].getType() == 3 || rooms[i+1][j].getType() == 2) && !(rooms[i-1][j].getType() == 1 || rooms[i-1][j].getType() == 2))
                             tip = 1;
                         else if(rooms[i-1][j].getType() == 1 || rooms[i-1][j].getType() == 2)
                             tip = 3;
@@ -141,18 +239,17 @@ public class Dungeon {
     //dir: 0 - jos, 1 - stanga, 2 - sus
     private int generateDir(int i, int oldtip, Random rand) {
         switch (oldtip) {
-            case 0 -> {
-                return 1;
+            case 0, 2 -> {
+                if(i == dimY-1)
+                    return rand.nextInt(2) + 1;
+                if(i == 0)
+                    return rand.nextInt(2);
+                return rand.nextInt(3);
             }
             case 1 -> {
                 if(i == dimY-1)
                     return 1;
                 return rand.nextInt(2);
-            }
-            case 2 -> {
-                if(i == 0 || i == dimY - 1)
-                    return 1;
-                return rand.nextInt(3);
             }
             case 3 -> {
                 if(i == 0)
@@ -185,6 +282,9 @@ public class Dungeon {
                 return true;
             if(indexOut > 1)
                 outside = false;
+            if(outside && GameState.isFoundTreasure()) {
+                GameState.setNext(new GameWinState());
+            }
             return false;
         }
         boolean end = false;
@@ -211,10 +311,11 @@ public class Dungeon {
             indexOut = 1;
             end = false;
         }
-        if(!outside && Player.getInstance().isArmed() && rooms[cRow][cColumn].isToBeLocked()) {
+       /* if(!outside && Player.getInstance().isArmed() && rooms[cRow][cColumn].isToBeLocked()) {
             rooms[cRow][cColumn].setToBeLocked(false);
             rooms[cRow][cColumn].setLocked(true);
-        }
+
+        }*/
         return end;
     }
 
@@ -224,5 +325,33 @@ public class Dungeon {
 
     public static void newInstance(MapSheet ms) throws IOException {
         instance = new Dungeon(ms);
+    }
+
+    public boolean isOutside() {
+        return outside;
+    }
+
+    public Room[][] getRooms() {
+        return rooms;
+    }
+
+    public int getDimX() {
+        return dimX;
+    }
+
+    public int getDimY() {
+        return dimY;
+    }
+
+    public int getIndexOut() {
+        return indexOut;
+    }
+
+    public int getcRow() {
+        return cRow;
+    }
+
+    public int getcColumn() {
+        return cColumn;
     }
 }

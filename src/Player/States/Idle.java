@@ -1,7 +1,7 @@
 package Player.States;
 
 import Input.KeyEnum;
-import Player.*;
+import Player.animations_enum;
 
 public class Idle extends PlayerState {
 

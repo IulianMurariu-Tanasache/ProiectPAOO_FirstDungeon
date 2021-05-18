@@ -1,5 +1,6 @@
 package Player;
 
+import ChestiiRandom.ChestiiStatice;
 import ChestiiRandom.MutableBoolean;
 import Dungeon.Dungeon;
 import GUI.Elements.StatsBar;
@@ -7,16 +8,16 @@ import Game.Window;
 import GameObject.GameObject;
 import GameObject.ID;
 import GameStates.GameState;
-import Player.States.Fall;
-import Player.States.Idle;
-import Player.States.Jump;
-import Player.States.PlayerState;
+import Player.States.*;
 import Room.Room;
+import SoundTrack.SoundManager;
 import SpriteSheet.Animation;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class Player extends GameObject {
@@ -45,6 +46,32 @@ public class Player extends GameObject {
     public Player(int x, int y, float scale, ID i) {
         super(x,y,scale,i);
         armed = false;
+    }
+
+    public static void load(ResultSet set) {
+        try {
+            if(set.getBoolean("armed")){
+                instance = new PlayerArmed(set.getInt("x"),set.getInt("y"),2.5f,ID.Player,"adventurer2");
+            }
+            else {
+                instance = new Player(set.getInt("x"),set.getInt("y"),2.5f,ID.Player,"adventurer1");
+            }
+            instance.setStamina(set.getInt("stamina"));
+            instance.setHealth(set.getInt("health"));
+            String stare = set.getString("state");
+            if(stare.equals("Crouch"))
+                instance.state = new Crouch();
+            if(stare.equals("Fall"))
+                instance.state = new Fall();
+            if(stare.equals("Idle"))
+                instance.state = new Idle();
+            if(stare.equals("Jump"))
+                instance.state = new Jump();
+            if(stare.equals("Walk"))
+                instance.state = new Walk();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public static void setInstance(int x, int y, float scale, ID i, String sheetName) {
@@ -97,6 +124,8 @@ public class Player extends GameObject {
         if(gotHit){
             gotHit = false;
             setHealth(health - 2);
+            if(GameState.getDiff() == 1)
+                setHealth(health - 1);
         }
 
         state = state.handleInput();
@@ -125,7 +154,7 @@ public class Player extends GameObject {
             g.drawImage(img, x + (int)(img.getWidth() * scale), y, (int)(img.getWidth() * scale * -1), (int)(img.getHeight() * scale), null);
         else
             g.drawImage(img, x, y, (int)(img.getWidth() * scale), (int)(img.getHeight() * scale), null);
-        g.drawRect(x, y, (int)(width * scale), (int)(height * scale));
+        //g.drawRect(x, y, (int)(width * scale), (int)(height * scale));
     }
 
     @Override
@@ -139,14 +168,14 @@ public class Player extends GameObject {
         Dungeon dungeon = Dungeon.getInstance();
         Room r = dungeon.getRoom();
         boolean updateRoom = false;
-        int startX = this.x / 64 - 1;
-        int startY = this.y / 64 - 1;
+        int startX = this.x / ChestiiStatice.tileDimension - 1;
+        int startY = this.y / ChestiiStatice.tileDimension - 1;
         if(startX < 0)
            startX = 0;
         if(startY < 0)
            startY = 0;
-        int endX = (int)(this.x + 25*scale) / 64 + 1;
-        int endY = (int)(this.y + 30*scale) / 64 + 1;
+        int endX = (int)(this.x + 25*scale) / ChestiiStatice.tileDimension + 1;
+        int endY = (int)(this.y + 30*scale) / ChestiiStatice.tileDimension + 1;
         if(endX >= r.getDimX())
            endX = r.getDimX() - 1;
         if(endY >= r.getDimY())
@@ -217,6 +246,8 @@ public class Player extends GameObject {
                            {
                                timerDamageCuie = 0;
                                setHealth(health - 1);
+                               if(GameState.getDiff() == 1)
+                                   setHealth(health - 1);
                            }
                        }
                        hit = true;
@@ -283,7 +314,10 @@ public class Player extends GameObject {
         if(health >= 0 && health < 7)
         {
             if(this.health > health)
+            {
                 GameState.setScore(GameState.getScore() + 20);
+                SoundManager.getSoundManager().play("damage.wav");
+            }
             this.health = health;
         }
         else if(health >= 7)
@@ -316,5 +350,9 @@ public class Player extends GameObject {
     /*public void setState(PlayerState state) {
         this.state = state;
     }*/
+
+    public PlayerState getState() {
+        return state;
+    }
 }
 

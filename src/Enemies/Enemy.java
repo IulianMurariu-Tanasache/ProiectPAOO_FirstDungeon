@@ -1,12 +1,13 @@
 package Enemies;
 
+import ChestiiRandom.ChestiiStatice;
 import ChestiiRandom.MutableBoolean;
 import Dungeon.Dungeon;
 import Enemies.States.EnemyState;
 import Enemies.States.Patrol;
 import Game.Window;
 import GameObject.GameObject;
-import GameObject.ID;;
+import GameObject.ID;
 import Player.Player;
 import Room.Room;
 import SpriteSheet.Animation;
@@ -15,6 +16,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
+
+;
 
 public abstract class Enemy extends GameObject{
 
@@ -67,10 +70,11 @@ public abstract class Enemy extends GameObject{
         super(x, y, i);
         if(new Random().nextInt(2) == 0) {
             facing = false;
-            x = x + EnemyState.getDistanceToPatrol();
+            this.x = x + EnemyState.getDistanceToPatrol();
         }
         else {
             facing = true;
+            this.x = x;
         }
         startX = x;
         inAnimation = new MutableBoolean();
@@ -97,6 +101,7 @@ public abstract class Enemy extends GameObject{
     public void tick() {
         Player player = Player.getInstance();
         playerBounds = player.getBounds();
+        playerBounds.x += + EnemyState.getDistanceToAttack();
         if(playerBounds.intersects(getBounds()) && player.isAttacking())
         {
             health--;
@@ -123,14 +128,14 @@ public abstract class Enemy extends GameObject{
     public void mapCollision() {
         Dungeon dungeon = Dungeon.getInstance();
         Room r = dungeon.getRoom();
-        int startX = (this.x - 5) / 64 - 1;
-        int startY = this.y / 64 - 1;
+        int startX = (this.x - 5) / ChestiiStatice.tileDimension - 1;
+        int startY = this.y / ChestiiStatice.tileDimension - 1;
         if(startX < 0)
             startX = 0;
         if(startY < 0)
             startY = 0;
-        int endX = (this.x + 5 + width) / 64 + 1;
-        int endY = (this.y + height) / 64 + 1;
+        int endX = (this.x + 5 + width) / ChestiiStatice.tileDimension + 1;
+        int endY = (this.y + height) / ChestiiStatice.tileDimension + 1;
         if(endX >= r.getDimX())
             endX = r.getDimX() - 1;
         if(endY >= r.getDimY())
@@ -221,4 +226,17 @@ public abstract class Enemy extends GameObject{
     public int getWidth() {
         return width;
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
 }
+

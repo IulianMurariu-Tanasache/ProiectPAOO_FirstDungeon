@@ -1,6 +1,6 @@
 package GUI.Elements;
 
-import SpriteSheet.SpriteSheet;
+import SpriteSheet.ImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,14 +9,14 @@ public class Imagine extends UI_Elemenent{
 
     private BufferedImage img = null;
 
-    public Imagine(int x, int y, SpriteSheet sheet) {
-        img = sheet.getImage();
+    public Imagine(int x, int y,String path) {
+        img = ImageLoader.loadImage(path);
         rect = new Rectangle(x,y,img.getWidth(),img.getHeight());
         visible = false;
     }
 
-    public Imagine(int x, int y, int w, int h, SpriteSheet sheet) {
-        img = sheet.getImage();
+    public Imagine(int x, int y, int w, int h, String path) {
+        img = ImageLoader.loadImage(path);
         rect = new Rectangle(x,y,w,h);
         visible = false;
     }

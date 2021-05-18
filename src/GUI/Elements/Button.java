@@ -19,7 +19,7 @@ public class Button extends UI_Elemenent implements Interactable{
         command = c;
         this.text = text;
         visible = false;
-        backColor = new Color(0,0,0,0);
+        backColor = Color.BLACK;
     }
 
     @Override

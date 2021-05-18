@@ -1,6 +1,7 @@
 package Player.States;
 
-import Player.*;
+import Player.animations_enum;
+import SoundTrack.SoundManager;
 
 public class Dash extends PlayerState{
 
@@ -11,6 +12,8 @@ public class Dash extends PlayerState{
     @Override
     public PlayerState handleInput() {
         if(!player.getInAnimation().val || player.getSpeedX() == 0) {
+            if(prev instanceof Jump)
+                prev = new Fall();
             prev.init();
             return prev;
         }
@@ -27,5 +30,6 @@ public class Dash extends PlayerState{
             player.setSpeedX(-2 * horizontalSpeed);
         player.setSpeedY(0);
         timerDash = timerTime;
+        SoundManager.getSoundManager().play("dash.wav");
     }
 }

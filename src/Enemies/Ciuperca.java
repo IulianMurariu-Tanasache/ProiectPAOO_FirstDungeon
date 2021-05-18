@@ -1,6 +1,9 @@
 package Enemies;
 
+import Dungeon.Dungeon;
+import Enemies.States.EnemyState;
 import GameObject.ID;
+import Player.Player;
 import SpriteSheet.Animation;
 
 import java.awt.*;
@@ -16,8 +19,23 @@ public class Ciuperca extends Enemy{
         width = (int) (40 * scale);
     }
 
-    /*@Override
+    @Override
     public void tick() {
+        Player player = Player.getInstance();
+        playerBounds = player.getBounds();
+        playerBounds.x += + EnemyState.getDistanceToAttack();
+        if(playerBounds.intersects(getBounds()) && player.isAttacking())
+        {
+            health--;
+            player.setAttacking(false);
+        }
+        player.setGotHit(hitPlayer);
+        hitPlayer = false;
+
+        if(health <= 0) {
+            Dungeon.getInstance().getRoom().remove(this);
+            return;
+        }
         state = state.update(playerBounds);
 
         mapCollision();
@@ -26,7 +44,7 @@ public class Ciuperca extends Enemy{
 
         if(attackTimer > 0)
             attackTimer--;
-    }*/
+    }
 
 
     @Override

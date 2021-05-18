@@ -1,8 +1,5 @@
 package GUI.Commands;
 
-import GameStates.GameState;
-import GameStates.MenuState;
-
 public class NothingCommand  implements Command{
 
     @Override

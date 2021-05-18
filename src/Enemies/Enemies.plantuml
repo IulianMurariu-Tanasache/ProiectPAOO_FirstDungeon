@@ -3,6 +3,15 @@
 title __ENEMIES's Class Diagram__\n
 
   namespace Enemies {
+    class Enemies.Ciuperca {
+        + Ciuperca()
+        + getBounds()
+        + render()
+    }
+  }
+  
+
+  namespace Enemies {
     abstract class Enemies.Enemy {
         {static} + ciuperca_anim : Animation[]
         {static} + eye_anim : Animation[]
@@ -23,6 +32,7 @@ title __ENEMIES's Class Diagram__\n
         + getAttackTimer()
         + getBounds()
         + getCurrentAnimation()
+        + getHealth()
         + getHeight()
         + getInAnimation()
         + getStartX()
@@ -34,8 +44,10 @@ title __ENEMIES's Class Diagram__\n
         {abstract} + render()
         + setAttackTimer()
         + setCurrentAnimation()
+        + setHealth()
         + setHitPlayer()
-        + updateObserver()
+        + setStartX()
+        + tick()
     }
   }
   
@@ -45,7 +57,6 @@ title __ENEMIES's Class Diagram__\n
         + Eye()
         + mapCollision()
         + render()
-        + tick()
     }
   }
   
@@ -54,7 +65,6 @@ title __ENEMIES's Class Diagram__\n
     class Enemies.Goblin {
         + Goblin()
         + render()
-        + tick()
     }
   }
   
@@ -63,7 +73,15 @@ title __ENEMIES's Class Diagram__\n
     class Enemies.Scheletron {
         + Scheletron()
         + render()
-        + tick()
+    }
+  }
+  
+
+  namespace Enemies {
+    class Enemies.Slime {
+        + Slime()
+        + getBounds()
+        + render()
     }
   }
   
@@ -76,7 +94,7 @@ title __ENEMIES's Class Diagram__\n
   }
   
 
-  Enemies.Enemy .up.|> Observer.Observer
+  Enemies.Ciuperca -up-|> Enemies.Enemy
   Enemies.Enemy -up-|> GameObject.GameObject
   Enemies.Enemy o-- SpriteSheet.Animation : currentAnimation
   Enemies.Enemy o-- ChestiiRandom.MutableBoolean : inAnimation
@@ -84,6 +102,7 @@ title __ENEMIES's Class Diagram__\n
   Enemies.Eye -up-|> Enemies.Enemy
   Enemies.Goblin -up-|> Enemies.Enemy
   Enemies.Scheletron -up-|> Enemies.Enemy
+  Enemies.Slime -up-|> Enemies.Enemy
 
 
 right footer

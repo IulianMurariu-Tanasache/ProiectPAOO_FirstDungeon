@@ -4,26 +4,41 @@ title __PLAYER's Class Diagram__\n
 
   namespace Player {
     class Player.Player {
-        - animations : Animation[]
-        - gotHit : boolean
-        - health : int
-        - height : int
-        - img : BufferedImage
-        {static} - instance : Player
-        - stamina : int
+        # animations : Animation[]
+        # armed : boolean
+        # attacking : boolean
+        # gotHit : boolean
+        # health : int
+        # height : int
+        # img : BufferedImage
+        {static} # instance : Player
+        # stamina : int
+        # timerDamageCuie : int
+        # timerDamageCuieConstanta : int
+        # timerStaminaRegen : int
+        # timerStaminaRegenConstanta : int
+        # width : int
+        + Player()
         + addStatsBar()
         + getBounds()
         + getHealth()
         + getInAnimation()
         {static} + getInstance()
         + getStamina()
+        + getState()
+        + isArmed()
+        + isAttacking()
+        {static} + load()
         + mapCollision()
         + render()
+        + setAttacking()
         + setCurrentAnimation()
         + setGotHit()
+        + setHealth()
         + setHeight()
         {static} + setInstance()
         + setStamina()
+        + setWidth()
         + tick()
         - Player()
     }
@@ -31,7 +46,17 @@ title __PLAYER's Class Diagram__\n
   
 
   namespace Player {
+    class Player.PlayerArmed {
+        + PlayerArmed()
+        + mapCollision()
+    }
+  }
+  
+
+  namespace Player {
     class Player.animations_enum {
+        {static} + attack1 : int
+        {static} + attack2 : int
         {static} + dash : int
         {static} + death : int
         {static} + fall : int
@@ -50,6 +75,7 @@ title __PLAYER's Class Diagram__\n
   Player.Player o-- ChestiiRandom.MutableBoolean : inAnimation
   Player.Player o-- Player.States.PlayerState : state
   Player.Player o-- GUI.Elements.StatsBar : statsBar
+  Player.PlayerArmed -up-|> Player.Player
 
 
 right footer

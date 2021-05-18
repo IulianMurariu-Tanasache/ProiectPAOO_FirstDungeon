@@ -4,9 +4,12 @@ title __SOUNDTRACK's Class Diagram__\n
 
   namespace SoundTrack {
     class SoundTrack.Music {
-        - audioInputStream : AudioInputStream
-        - clip : Clip
+        - clips : String[]
+        - currentClip : Clip
+        - index : int
         {static} - instace : Music
+        - started : boolean
+        - waiting : LineListener
         {static} + getInstance()
         + resetAudioStream()
         + run()
@@ -17,7 +20,24 @@ title __SOUNDTRACK's Class Diagram__\n
   }
   
 
+  namespace SoundTrack {
+    class SoundTrack.SoundManager {
+        - executor : ExecutorService
+        - index : int
+        {static} - soundManager : SoundManager
+        - waiting : LineListener
+        {static} + getSoundManager()
+        + play()
+        + run()
+        {static} + setSoundManager()
+        - SoundManager()
+        - stop()
+    }
+  }
+  
+
   SoundTrack.Music .up.|> java.lang.Runnable
+  SoundTrack.SoundManager .up.|> java.lang.Runnable
 
 
 right footer

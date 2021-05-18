@@ -2,65 +2,140 @@
 
 title __COMMANDS's Class Diagram__\n
 
-  namespace GUI {
-    namespace Commands {
-      class GUI.Commands.BackCommand {
-          + execute()
-      }
+  namespace GUI.Commands {
+    class GUI.Commands.BackCommand {
+        + execute()
     }
   }
   
 
-  namespace GUI {
-    namespace Commands {
-      interface GUI.Commands.Command {
-          {abstract} + execute()
-      }
+  namespace GUI.Commands {
+    interface GUI.Commands.CheckBoxCommand {
+        {abstract} + execute()
     }
   }
   
 
-  namespace GUI {
-    namespace Commands {
-      class GUI.Commands.NothingCommand {
-          + execute()
-      }
+  namespace GUI.Commands {
+    interface GUI.Commands.Command {
+        {abstract} + execute()
     }
   }
   
 
-  namespace GUI {
-    namespace Commands {
-      class GUI.Commands.PausePanelCommand {
-          + execute()
-      }
+  namespace GUI.Commands {
+    class GUI.Commands.EasyCommand {
+        + execute()
     }
   }
   
 
-  namespace GUI {
-    namespace Commands {
-      class GUI.Commands.ToGameCommand {
-          + execute()
-      }
+  namespace GUI.Commands {
+    class GUI.Commands.HardCommand {
+        + execute()
     }
   }
   
 
-  namespace GUI {
-    namespace Commands {
-      class GUI.Commands.ToMenuCommand {
-          + execute()
-      }
+  namespace GUI.Commands {
+    class GUI.Commands.LoadCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.MusicOnCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.NothingCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.PausePanelCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.QuitCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.SaveComand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.SoundOnCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToDiffPanelCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToGameCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToLeaderBoardCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToMenuCommand {
+        + execute()
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToSettingsCommand {
+        + execute()
     }
   }
   
 
   GUI.Commands.BackCommand .up.|> GUI.Commands.Command
+  GUI.Commands.EasyCommand .up.|> GUI.Commands.Command
+  GUI.Commands.HardCommand .up.|> GUI.Commands.Command
+  GUI.Commands.LoadCommand .up.|> GUI.Commands.Command
+  GUI.Commands.MusicOnCommand .up.|> GUI.Commands.CheckBoxCommand
   GUI.Commands.NothingCommand .up.|> GUI.Commands.Command
   GUI.Commands.PausePanelCommand .up.|> GUI.Commands.Command
+  GUI.Commands.QuitCommand .up.|> GUI.Commands.Command
+  GUI.Commands.SaveComand .up.|> GUI.Commands.Command
+  GUI.Commands.SoundOnCommand .up.|> GUI.Commands.CheckBoxCommand
+  GUI.Commands.ToDiffPanelCommand .up.|> GUI.Commands.Command
   GUI.Commands.ToGameCommand .up.|> GUI.Commands.Command
+  GUI.Commands.ToLeaderBoardCommand .up.|> GUI.Commands.Command
   GUI.Commands.ToMenuCommand .up.|> GUI.Commands.Command
+  GUI.Commands.ToSettingsCommand .up.|> GUI.Commands.Command
 
 
 right footer

@@ -1,6 +1,7 @@
 package Player.States;
 
 import Player.animations_enum;
+import SoundTrack.SoundManager;
 
 public class Attack extends PlayerState{
 
@@ -41,5 +42,6 @@ public class Attack extends PlayerState{
         player.setAttacking(true);
         i = (i + 1) % 2;
         player.setSpeedX(0);
+        SoundManager.getSoundManager().play("slash.wav");
     }
 }

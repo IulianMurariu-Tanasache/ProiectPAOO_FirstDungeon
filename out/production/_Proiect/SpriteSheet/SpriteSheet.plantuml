@@ -17,6 +17,13 @@ title __SPRITESHEET's Class Diagram__\n
   
 
   namespace SpriteSheet {
+    class SpriteSheet.ImageLoader {
+        {static} + loadImage()
+    }
+  }
+  
+
+  namespace SpriteSheet {
     class SpriteSheet.MapSheet {
         - tiles : Tile[]
         + MapSheet()
@@ -32,7 +39,6 @@ title __SPRITESHEET's Class Diagram__\n
         # image : BufferedImage
         + SpriteSheet()
         + getFile()
-        + getImage()
         + grabImage()
         + grabImages()
     }
@@ -41,13 +47,16 @@ title __SPRITESHEET's Class Diagram__\n
 
   namespace SpriteSheet {
     class SpriteSheet.Tile {
+        - bounds : Rectangle
         - img : BufferedImage
         - name : String
         - solid : boolean
         + Tile()
+        + getBounds()
         + getImg()
         + getName()
         + isSolid()
+        + setBounds()
     }
   }
   

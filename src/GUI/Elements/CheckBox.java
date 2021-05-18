@@ -1,5 +1,6 @@
 package GUI.Elements;
 
+import ChestiiRandom.ChestiiStatice;
 import GUI.Commands.CheckBoxCommand;
 
 import java.awt.*;
@@ -19,8 +20,8 @@ public class CheckBox extends UI_Elemenent implements Interactable{
         thickness = (int) Math.ceil((float)w / 10);
         text.setSize(sizeText);
         checked = false;
-        color = new Color(11,132,80);
-        text.setTextColor(new Color(70,12,89));
+        color = ChestiiStatice.verzui;
+        text.setTextColor(ChestiiStatice.mov);
         this.comand = command;
         visible = false;
     }
@@ -85,5 +86,9 @@ public class CheckBox extends UI_Elemenent implements Interactable{
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

@@ -1,8 +1,9 @@
 package SpriteSheet;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class SpriteSheet {
 
@@ -16,7 +17,7 @@ public class SpriteSheet {
 
     //filename pt sheet si incarc aici
     public SpriteSheet(String bf, String file) throws IOException {
-        image = ImageIO.read(new File("Assets/SpriteSheets/" + bf + ".png"));
+        image = ImageLoader.loadImage("Assets/SpriteSheets/" + file + ".png");
         this.file = "Assets/SpriteSheets/" + file + ".sheet";
     }
 
@@ -70,9 +71,5 @@ public class SpriteSheet {
             }
         }
         return null;
-    }
-
-    public BufferedImage getImage() {
-        return image;
     }
 }

@@ -3,6 +3,7 @@ package Enemies.States;
 import Enemies.Enemy;
 import Enemies.animations_enemy_enum;
 import GameObject.ID;
+import SoundTrack.SoundManager;
 
 import java.awt.*;
 
@@ -48,31 +49,34 @@ public class Attack extends EnemyState{
             canAttack = false;
             if (thisEnemy.getId() == ID.Enemy_Skeleton) {
                 thisEnemy.setCurrentAnimation(Enemy.skeleton_anim[animations_enemy_enum.attack]);
+                SoundManager.getSoundManager().play("skeleton.wav");
                 return this;
             }
             if (thisEnemy.getId() == ID.Enemy_Goblin) {
                 thisEnemy.setCurrentAnimation(Enemy.goblin_anim[animations_enemy_enum.attack]);
+                SoundManager.getSoundManager().play("goblin.wav");
                 return this;
             }
             if (thisEnemy.getId() == ID.Enemy_Eye) {
                 thisEnemy.setCurrentAnimation(Enemy.eye_anim[animations_enemy_enum.attack]);
+                SoundManager.getSoundManager().play("eye.wav");
                 return this;
             }
             if (thisEnemy.getId() == ID.Enemy_Slime) {
                 thisEnemy.setCurrentAnimation(Enemy.slime_anim[animations_enemy_enum.attack]);
+                SoundManager.getSoundManager().play("slime.wav");
                 return this;
             }
             if (thisEnemy.getId() == ID.Enemy_Ciuperca) {
                 thisEnemy.setCurrentAnimation(Enemy.ciuperca_anim[animations_enemy_enum.attack]);
+                SoundManager.getSoundManager().play("ciuperca.wav");
                 return this;
             }
 
         }
 
         if(!thisEnemy.getInAnimation().val && thisEnemy.getCurrentAnimation() != null) {
-            if(thisEnemy.getBounds().intersects(playerBounds)){
-                thisEnemy.setHitPlayer(true);
-            }
+            thisEnemy.setHitPlayer(true);
             thisEnemy.setCurrentAnimation(null);
         }
 
@@ -83,7 +87,7 @@ public class Attack extends EnemyState{
     public void init() {
         thisEnemy.setSpeedX(0);
         canAttack = false;
-        thisEnemy.setAttackTimer(80);
+        thisEnemy.setAttackTimer(50);
         thisEnemy.setCurrentAnimation(null);
     }
 }

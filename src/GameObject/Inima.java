@@ -2,6 +2,7 @@ package GameObject;
 
 import Dungeon.Dungeon;
 import Player.Player;
+import SoundTrack.SoundManager;
 import SpriteSheet.SpriteSheet;
 
 import java.awt.*;
@@ -29,6 +30,7 @@ public class Inima extends GameObject {
         if(playerBounds.intersects(getBounds()) && Player.getInstance().getHealth() < 6) {
             Dungeon.getInstance().getRoom().remove(this);
             player.setHealth(player.getHealth() + 2);
+            SoundManager.getSoundManager().play("heart.wav");
         }
     }
 

@@ -1,5 +1,5 @@
 <animated=false>//linia - 3 pt index
-19
+21
 ciment_jos:192,258,64,60,1,0,0,64,64
 ciment_stanga:69,128,54,64,1,0,0,64,64
 ciment_dreapta:321,128,62,64,1,0,0,64,64
@@ -19,7 +19,9 @@ cuie_jos:320,512,64,64,1,0,0,64,40
 lant:448,512,64,128,0
 tepi:576,320,64,64,1,0,0,64,64
 vas:1216,0,32,64,0
-// 9 background, 10 peste
+usa_blocata:789,659,64,192,1,0,0,64,192
+usa_blocata_sus:1024,727,192,64,1,0,0,192,64
+// 9 background, 12 peste
 //scos din uz
 ciment_full:256,768,192,64
 steag_varf:512,128,64,64

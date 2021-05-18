@@ -1,5 +1,6 @@
 package Player;
 
+import ChestiiRandom.ChestiiStatice;
 import ChestiiRandom.MutableBoolean;
 import Dungeon.Dungeon;
 import Game.Window;
@@ -61,14 +62,14 @@ public class PlayerArmed extends Player {
         Dungeon dungeon = Dungeon.getInstance();
         Room r = dungeon.getRoom();
         boolean updateRoom = false;
-        int startX = this.x / 64 - 1;
-        int startY = this.y / 64 - 1;
+        int startX = this.x / ChestiiStatice.tileDimension - 1;
+        int startY = this.y / ChestiiStatice.tileDimension - 1;
         if(startX < 0)
             startX = 0;
         if(startY < 0)
             startY = 0;
-        int endX = (int)(this.x + 25*scale) / 64 + 1;
-        int endY = (int)(this.y + 30*scale) / 64 + 1;
+        int endX = (int)(this.x + 25*scale) / ChestiiStatice.tileDimension + 1;
+        int endY = (int)(this.y + 30*scale) / ChestiiStatice.tileDimension + 1;
         if(endX >= r.getDimX())
             endX = r.getDimX() - 1;
         if(endY >= r.getDimY())
@@ -139,6 +140,8 @@ public class PlayerArmed extends Player {
                             {
                                 timerDamageCuie = 0;
                                 setHealth(health - 1);
+                                if(GameState.getDiff() == 1)
+                                    setHealth(health - 1);
                             }
                         }
                         hit = true;

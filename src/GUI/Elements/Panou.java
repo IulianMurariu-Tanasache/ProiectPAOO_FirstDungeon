@@ -15,7 +15,7 @@ public class Panou extends UI_Elemenent{
 
     @Override
     public void setVisible(boolean visible) {
-        super.setVisible(visible);
+        this.visible = visible;
         for(UI_Elemenent el : elements)
             el.setVisible(visible);
     }

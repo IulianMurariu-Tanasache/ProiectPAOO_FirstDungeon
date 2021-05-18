@@ -1,0 +1,668 @@
+@startuml
+
+title ___PROIECT's Class Diagram__\n
+
+  namespace ChestiiRandom {
+    class ChestiiRandom.ChestiiStatice {
+    }
+  }
+  
+
+  namespace ChestiiRandom {
+    class ChestiiRandom.FunctiiStaticeRandom {
+    }
+  }
+  
+
+  namespace ChestiiRandom {
+    class ChestiiRandom.MutableBoolean {
+    }
+  }
+  
+
+  namespace Dungeon {
+    class Dungeon.Dungeon {
+    }
+  }
+  
+
+  namespace Enemies {
+    class Enemies.Ciuperca {
+    }
+  }
+  
+
+  namespace Enemies {
+    abstract class Enemies.Enemy {
+    }
+  }
+  
+
+  namespace Enemies {
+    class Enemies.Eye {
+    }
+  }
+  
+
+  namespace Enemies {
+    class Enemies.Goblin {
+    }
+  }
+  
+
+  namespace Enemies {
+    class Enemies.Scheletron {
+    }
+  }
+  
+
+  namespace Enemies {
+    class Enemies.Slime {
+    }
+  }
+  
+
+  namespace Enemies {
+    namespace States {
+      class Enemies.States.Attack {
+      }
+    }
+  }
+  
+
+  namespace Enemies {
+    namespace States {
+      abstract class Enemies.States.EnemyState {
+      }
+    }
+  }
+  
+
+  namespace Enemies {
+    namespace States {
+      class Enemies.States.Follow {
+      }
+    }
+  }
+  
+
+  namespace Enemies {
+    namespace States {
+      class Enemies.States.GoToStart {
+      }
+    }
+  }
+  
+
+  namespace Enemies {
+    namespace States {
+      class Enemies.States.Patrol {
+      }
+    }
+  }
+  
+
+  namespace Enemies {
+    class Enemies.animations_enemy_enum {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.BackCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    interface GUI.Commands.CheckBoxCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    interface GUI.Commands.Command {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.EasyCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.HardCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.LoadCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.MusicOnCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.NothingCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.PausePanelCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.QuitCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.SaveComand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.SoundOnCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToDiffPanelCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToGameCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToLeaderBoardCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToMenuCommand {
+    }
+  }
+  
+
+  namespace GUI.Commands {
+    class GUI.Commands.ToSettingsCommand {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.Button {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.CheckBox {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.Imagine {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    interface GUI.Elements.Interactable {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.MenuParallax {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.Panou {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.ScorePanel {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.StatsBar {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    class GUI.Elements.Text {
+    }
+  }
+  
+
+  namespace GUI.Elements {
+    abstract class GUI.Elements.UI_Elemenent {
+    }
+  }
+  
+
+  namespace Game {
+    class Game.Game {
+    }
+  }
+  
+
+  namespace Game {
+    class Game.Window {
+    }
+  }
+  
+
+  namespace Game {
+    namespace bject {
+      class GameObject.Comoara {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace bject {
+      abstract class GameObject.GameObject {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace bject {
+      enum ID {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace bject {
+      class GameObject.Inima {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace bject {
+      class GameObject.SpeechBubbles {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.DiffSelectState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GameContinueState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GameDedState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GamePausedState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      abstract class GameStates.GameState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GameWinState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.GameplayState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.LeaderboardState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.MenuState {
+      }
+    }
+  }
+  
+
+  namespace Game {
+    namespace tates {
+      class GameStates.SettingsState {
+      }
+    }
+  }
+  
+
+  namespace Input {
+    enum KeyEnum {
+    }
+  }
+  
+
+  namespace Input {
+    class Input.KeyInput {
+    }
+  }
+  
+
+  namespace Input {
+    class Input.MouseListener {
+    }
+  }
+  
+
+  namespace Player {
+    class Player.Player {
+    }
+  }
+  
+
+  namespace Player {
+    class Player.PlayerArmed {
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Attack {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Crouch {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Dash {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Ded {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Fall {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Idle {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Jump {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      abstract class Player.States.PlayerState {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    namespace States {
+      class Player.States.Walk {
+      }
+    }
+  }
+  
+
+  namespace Player {
+    class Player.animations_enum {
+    }
+  }
+  
+
+  namespace Room {
+    abstract class Room.Room {
+    }
+  }
+  
+
+  namespace Room {
+    class Room.RoomInterior {
+    }
+  }
+  
+
+  namespace Room {
+    class Room.RoomOutdoor {
+    }
+  }
+  
+
+  namespace SQLite {
+    class SQLite.SQLite {
+    }
+  }
+  
+
+  namespace SoundTrack {
+    class SoundTrack.Music {
+    }
+  }
+  
+
+  namespace SoundTrack {
+    class SoundTrack.SoundManager {
+    }
+  }
+  
+
+  namespace SpriteSheet {
+    class SpriteSheet.Animation {
+    }
+  }
+  
+
+  namespace SpriteSheet {
+    class SpriteSheet.ImageLoader {
+    }
+  }
+  
+
+  namespace SpriteSheet {
+    class SpriteSheet.MapSheet {
+    }
+  }
+  
+
+  namespace SpriteSheet {
+    class SpriteSheet.SpriteSheet {
+    }
+  }
+  
+
+  namespace SpriteSheet {
+    class SpriteSheet.Tile {
+    }
+  }
+  
+
+  Enemies.Ciuperca -up-|> Enemies.Enemy
+  Enemies.Enemy -up-|> GameObject.GameObject
+  Enemies.Enemy o-- SpriteSheet.Animation : currentAnimation
+  Enemies.Enemy o-- ChestiiRandom.MutableBoolean : inAnimation
+  Enemies.Enemy o-- Enemies.States.EnemyState : state
+  Enemies.Eye -up-|> Enemies.Enemy
+  Enemies.Goblin -up-|> Enemies.Enemy
+  Enemies.Scheletron -up-|> Enemies.Enemy
+  Enemies.Slime -up-|> Enemies.Enemy
+  Enemies.States.Attack -up-|> Enemies.States.EnemyState
+  Enemies.States.EnemyState o-- Enemies.Enemy : thisEnemy
+  Enemies.States.Follow -up-|> Enemies.States.EnemyState
+  Enemies.States.GoToStart -up-|> Enemies.States.EnemyState
+  Enemies.States.Patrol -up-|> Enemies.States.EnemyState
+  GUI.Commands.BackCommand .up.|> GUI.Commands.Command
+  GUI.Commands.EasyCommand .up.|> GUI.Commands.Command
+  GUI.Commands.HardCommand .up.|> GUI.Commands.Command
+  GUI.Commands.LoadCommand .up.|> GUI.Commands.Command
+  GUI.Commands.MusicOnCommand .up.|> GUI.Commands.CheckBoxCommand
+  GUI.Commands.NothingCommand .up.|> GUI.Commands.Command
+  GUI.Commands.PausePanelCommand .up.|> GUI.Commands.Command
+  GUI.Commands.QuitCommand .up.|> GUI.Commands.Command
+  GUI.Commands.SaveComand .up.|> GUI.Commands.Command
+  GUI.Commands.SoundOnCommand .up.|> GUI.Commands.CheckBoxCommand
+  GUI.Commands.ToDiffPanelCommand .up.|> GUI.Commands.Command
+  GUI.Commands.ToGameCommand .up.|> GUI.Commands.Command
+  GUI.Commands.ToLeaderBoardCommand .up.|> GUI.Commands.Command
+  GUI.Commands.ToMenuCommand .up.|> GUI.Commands.Command
+  GUI.Commands.ToSettingsCommand .up.|> GUI.Commands.Command
+  GUI.Elements.Button .up.|> GUI.Elements.Interactable
+  GUI.Elements.Button -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.Button o-- GUI.Commands.Command : command
+  GUI.Elements.CheckBox .up.|> GUI.Elements.Interactable
+  GUI.Elements.CheckBox -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.CheckBox o-- GUI.Commands.CheckBoxCommand : comand
+  GUI.Elements.CheckBox o-- GUI.Elements.Text : text
+  GUI.Elements.Imagine -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.MenuParallax -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.Panou -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.ScorePanel -up-|> GUI.Elements.Panou
+  GUI.Elements.StatsBar -up-|> GUI.Elements.UI_Elemenent
+  GUI.Elements.Text -up-|> GUI.Elements.UI_Elemenent
+  Game.Game .up.|> java.lang.Runnable
+  Game.Game -up-|> java.awt.Canvas
+  GameObject.Comoara -up-|> GameObject.GameObject
+  GameObject.Comoara o-- SpriteSheet.Animation : animation
+  GameObject.Comoara o-- ChestiiRandom.MutableBoolean : inAnimation
+  GameObject.GameObject o-- GameObject.ID : id
+  GameObject.Inima -up-|> GameObject.GameObject
+  GameObject.SpeechBubbles -up-|> GameObject.GameObject
+  GameStates.DiffSelectState -up-|> GameStates.GameState
+  GameStates.GameDedState -up-|> GameStates.GameplayState
+  GameStates.GamePausedState -up-|> GameStates.GameplayState
+  GameStates.GameWinState -up-|> GameStates.GameState
+  GameStates.GameplayState -up-|> GameStates.GameState
+  GameStates.GameplayState o-- GUI.Elements.Text : scoreText
+  GameStates.LeaderboardState -up-|> GameStates.GameState
+  GameStates.MenuState -up-|> GameStates.GameState
+  GameStates.SettingsState -up-|> GameStates.GameState
+  Input.KeyInput -up-|> java.awt.event.KeyAdapter
+  Input.MouseListener .up.|> java.awt.event.MouseListener
+  Player.Player -up-|> GameObject.GameObject
+  Player.Player o-- SpriteSheet.Animation : currentAnimation
+  Player.Player o-- ChestiiRandom.MutableBoolean : inAnimation
+  Player.Player o-- Player.States.PlayerState : state
+  Player.Player o-- GUI.Elements.StatsBar : statsBar
+  Player.PlayerArmed -up-|> Player.Player
+  Player.States.Attack -up-|> Player.States.PlayerState
+  Player.States.Crouch -up-|> Player.States.PlayerState
+  Player.States.Dash -up-|> Player.States.PlayerState
+  Player.States.Ded -up-|> Player.States.PlayerState
+  Player.States.Fall -up-|> Player.States.PlayerState
+  Player.States.Idle -up-|> Player.States.PlayerState
+  Player.States.Jump -up-|> Player.States.PlayerState
+  Player.States.Walk -up-|> Player.States.PlayerState
+  Room.RoomInterior -up-|> Room.Room
+  Room.RoomOutdoor -up-|> Room.Room
+  SoundTrack.Music .up.|> java.lang.Runnable
+  SoundTrack.SoundManager .up.|> java.lang.Runnable
+  SpriteSheet.MapSheet -up-|> SpriteSheet.SpriteSheet
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

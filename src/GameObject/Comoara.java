@@ -1,8 +1,10 @@
 package GameObject;
 
+import ChestiiRandom.ChestiiStatice;
 import ChestiiRandom.MutableBoolean;
 import Game.Window;
 import GameStates.GameState;
+import SoundTrack.SoundManager;
 import SpriteSheet.Animation;
 
 import java.awt.*;
@@ -36,6 +38,7 @@ public class Comoara extends GameObject{
         //entered = true;
         if(!entered)
         {
+            SoundManager.getSoundManager().play("chest.wav");
             entered = true;
             inAnimation.val = true;
             scale = 5;
@@ -62,7 +65,7 @@ public class Comoara extends GameObject{
         if(inAnimation.val)
         {
             img = animation.getCurrentFrame(inAnimation);
-            g.setColor(new Color(40,40,40,100));
+            g.setColor(ChestiiStatice.gri_tare_inchis);
             g.fillRect(0,0,Window.getInstance().getWidth(), Window.getInstance().getHeight());
         }
         else
@@ -72,6 +75,6 @@ public class Comoara extends GameObject{
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, (int)(64 * scale), (int)(64 * scale));
+        return new Rectangle(x, y, (int)(ChestiiStatice.tileDimension * scale), (int)(ChestiiStatice.tileDimension * scale));
     }
 }
