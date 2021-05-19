@@ -23,9 +23,6 @@ public class MouseListener implements java.awt.event.MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-       // for(Interactable el : uiElements)
-           // el.mouseClicked(e);
-        //SoundManager.getSoundManager().play("click.wav");
     }
 
     @Override

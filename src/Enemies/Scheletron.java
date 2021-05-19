@@ -5,6 +5,9 @@ import SpriteSheet.Animation;
 
 import java.awt.*;
 
+/*! \class Scheletron
+    \brief Clasa care extinde Enemy. Reprezinta inamicul Scheletron.
+ */
 public class Scheletron extends Enemy{
 
     public Scheletron(int x, int y, float scale, ID i) {

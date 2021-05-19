@@ -2,7 +2,9 @@ package GameStates;
 
 import java.awt.*;
 
-
+/*! \class GameDedState
+    \brief Clasa care extinde GameplayState. Reprezinta starea jocului in momentul in care jucatorul moare.
+ */
 public class GameDedState extends GameplayState{
 
     public GameDedState() {
@@ -13,6 +15,7 @@ public class GameDedState extends GameplayState{
     public void init() {
         super.init();
         deathPanel.setVisible(true);
+        score = 0;
     }
 
     @Override
@@ -20,25 +23,6 @@ public class GameDedState extends GameplayState{
         super.render(g);
         deathPanel.render(g);
     }
-
-    //    @Override
-//    public void render(Graphics g) {
-//
-//        g.clearRect(0,0, Window.getInstance().getWidth(), Window.getInstance().getHeight());
-//        g.setColor(ChestiiStatice.visiniu);
-//        g.fillRect(0,0,Window.getInstance().getWidth(), Window.getInstance().getHeight());
-//
-//
-//        Dungeon.getInstance().getRoom().render(g);
-//        Player.getInstance().render(g);
-//
-//        for(GameObject obj : Dungeon.getInstance().getRoom().getObjects())
-//            obj.render(g);
-//
-//        for(UI_Elemenent ui : GameUI)
-//            ui.render(g);
-//        deathPanel.render(g);
-//    }
 
     @Override
     public void tick() {

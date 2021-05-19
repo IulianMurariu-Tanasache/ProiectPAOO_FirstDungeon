@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/*! \class Inima
+    \brief Clasa care extinde GameObject. Reprezinta o inima de cules din joc.
+ */
 public class Inima extends GameObject {
 
     private BufferedImage img;

@@ -16,14 +16,6 @@ title __GAMESTATES's Class Diagram__\n
 
   namespace Game {
     namespace tates {
-      class GameStates.GameContinueState {
-      }
-    }
-  }
-  
-
-  namespace Game {
-    namespace tates {
       class GameStates.GameDedState {
           + GameDedState()
           + clearUI()
@@ -60,20 +52,23 @@ title __GAMESTATES's Class Diagram__\n
           {static} # diff : int
           {static} # diffPanel : Panou
           {static} # foundTreasure : boolean
+          {static} # instance : GameState
           {static} # menuBack : MenuParallax
           {static} # next : GameState
           {static} # pausedPanel : Panou
           {static} # prev : GameState
           {static} # score : int
+          {static} # scores : int[]
           {static} # toLoad : boolean
-          {static} - instance : GameState
           {static} - musicOn : boolean
           {static} - running : boolean
           {static} - soundOn : boolean
+          {static} + CantLoadGame()
           {abstract} + clearUI()
           {static} + getDiff()
           {static} + getInstance()
           {static} + getScore()
+          {static} + getScores()
           {abstract} + init()
           {static} + isFoundTreasure()
           {static} + isMusicOn()
@@ -81,6 +76,8 @@ title __GAMESTATES's Class Diagram__\n
           {static} + isSoundOn()
           {static} + isToLoad()
           {static} + load()
+          {static} + loadDefault()
+          {static} + loadGameState()
           + nextState()
           {static} + prevState()
           {abstract} + render()

@@ -10,6 +10,7 @@ import GameObject.ID;
 import GameStates.GameState;
 import Player.States.*;
 import Room.Room;
+import SQLite.NotLoadedException;
 import SoundTrack.SoundManager;
 import SpriteSheet.Animation;
 
@@ -48,7 +49,7 @@ public class Player extends GameObject {
         armed = false;
     }
 
-    public static void load(ResultSet set) {
+    public static void load(ResultSet set) throws NotLoadedException {
         try {
             if(set.getBoolean("armed")){
                 instance = new PlayerArmed(set.getInt("x"),set.getInt("y"),2.5f,ID.Player,"adventurer2");
@@ -70,7 +71,7 @@ public class Player extends GameObject {
             if(stare.equals("Walk"))
                 instance.state = new Walk();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new NotLoadedException();
         }
     }
 

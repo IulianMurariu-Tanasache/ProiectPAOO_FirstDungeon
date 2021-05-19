@@ -24,7 +24,7 @@ public class Attack extends PlayerState{
             prev.init();
             player.setWidth(22);
             player.setHeight(29);
-            player.setAttacking(false);
+            player.setAttacking(true);
             return prev;
         }
         return this;
@@ -39,7 +39,7 @@ public class Attack extends PlayerState{
             player.setY((int) (player.getY() - 8 * player.getScale()));
             player.setHeight(36);
         }
-        player.setAttacking(true);
+        //player.setAttacking(true);
         i = (i + 1) % 2;
         player.setSpeedX(0);
         SoundManager.getSoundManager().play("slash.wav");

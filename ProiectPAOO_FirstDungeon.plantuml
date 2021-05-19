@@ -1,15 +1,9 @@
 @startuml
 
-title ___PROIECT's Class Diagram__\n
+title FirstDungeon Diagramm\n
 
   namespace ChestiiRandom {
     class ChestiiRandom.ChestiiStatice {
-    }
-  }
-  
-
-  namespace ChestiiRandom {
-    class ChestiiRandom.FunctiiStaticeRandom {
     }
   }
   
@@ -208,7 +202,6 @@ title ___PROIECT's Class Diagram__\n
     class GUI.Commands.ToSettingsCommand {
     }
   }
-  
 
   namespace GUI.Elements {
     class GUI.Elements.Button {
@@ -323,7 +316,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.DiffSelectState {
       }
     }
@@ -331,15 +324,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
-      class GameStates.GameContinueState {
-      }
-    }
-  }
-  
-
-  namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.GameDedState {
       }
     }
@@ -347,7 +332,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.GamePausedState {
       }
     }
@@ -355,7 +340,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       abstract class GameStates.GameState {
       }
     }
@@ -363,7 +348,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.GameWinState {
       }
     }
@@ -371,7 +356,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.GameplayState {
       }
     }
@@ -379,7 +364,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.LeaderboardState {
       }
     }
@@ -387,7 +372,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.MenuState {
       }
     }
@@ -395,7 +380,7 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace Game {
-    namespace tates {
+    namespace States {
       class GameStates.SettingsState {
       }
     }
@@ -529,6 +514,12 @@ title ___PROIECT's Class Diagram__\n
   
 
   namespace SQLite {
+    class SQLite.NotLoadedException {
+    }
+  }
+  
+
+  namespace SQLite {
     class SQLite.SQLite {
     }
   }
@@ -574,8 +565,31 @@ title ___PROIECT's Class Diagram__\n
     class SpriteSheet.Tile {
     }
   }
-  
 
+  GUI.Commands.SoundOnCommand -[hidden]down-> GUI.Commands.SaveComand
+  GUI.Commands-[hidden]up->GameState
+  Player-[hidden]up->GUI.Elements
+  SpriteSheet -[hidden]up-> GUI.Commands
+  Enemies -[hidden]left-> GameObject
+  Enemies -[hidden]up-> GUI.Commands
+  Enemies -[hidden]left-> GUI.Elements
+  Enemies -[hidden]left-> SpriteSheet
+  Enemies -[hidden]down-> GameState
+  GameObject -[hidden]left-> Player
+  GameState-[hidden]left->ChestiiRandom
+  Player-[hidden]down->ChestiiRandom
+  Player-[hidden]up->java
+  GameState-[hidden]left->SQLite
+  GameObject -[hidden]right-> GUI.Elements
+  Enemies -[hidden]down-> GUI.Commands
+  GUI.Elements -[hidden]left-> Room
+  GUI.Elements -[hidden]left-> java.awt
+  GUI.Elements -[hidden]left-> GameState
+  GUI.Elements -[hidden]up-> GUI.Commands
+  Room -[hidden]--> SQLite
+  Room -[hidden]--> java.awt.event
+  java.lang -[hidden]--> SQLite
+  GUI.Elements -[hidden]up--> GameStates
   Enemies.Ciuperca -up-|> Enemies.Enemy
   Enemies.Enemy -up-|> GameObject.GameObject
   Enemies.Enemy o-- SpriteSheet.Animation : currentAnimation

@@ -5,6 +5,9 @@ import SpriteSheet.Animation;
 
 import java.awt.*;
 
+/*! \class Goblin
+    \brief Clasa care extinde Enemy. Reprezinta inamicul Goblin.
+ */
 public class Goblin extends Enemy{
 
     public Goblin(int x, int y, float scale, ID i) {

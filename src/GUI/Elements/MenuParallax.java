@@ -6,6 +6,9 @@ import SpriteSheet.ImageLoader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/*! \class MenuParallax
+    \brief Clasa care extinde UI_Element.
+ */
 public class MenuParallax extends UI_Elemenent{
 
     private BufferedImage[] back1;

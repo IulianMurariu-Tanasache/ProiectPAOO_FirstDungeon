@@ -8,6 +8,9 @@ import SpriteSheet.Animation;
 
 import java.awt.*;
 
+/*! \class Ciuperca
+    \brief Clasa care extinde Enemy. Reprezinta inamicul Ciuperca.
+ */
 public class Ciuperca extends Enemy{
 
     public Ciuperca(int x, int y, float scale, ID i) {
@@ -23,7 +26,8 @@ public class Ciuperca extends Enemy{
     public void tick() {
         Player player = Player.getInstance();
         playerBounds = player.getBounds();
-        playerBounds.x += + EnemyState.getDistanceToAttack();
+        playerBounds.x -= EnemyState.getDistanceToAttack() / 2;
+        playerBounds.width += EnemyState.getDistanceToAttack() / 2;
         if(playerBounds.intersects(getBounds()) && player.isAttacking())
         {
             health--;

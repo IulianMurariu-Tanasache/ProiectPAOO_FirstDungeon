@@ -14,12 +14,6 @@ title __CHESTIIRANDOM's Class Diagram__\n
   
 
   namespace ChestiiRandom {
-    class ChestiiRandom.FunctiiStaticeRandom {
-    }
-  }
-  
-
-  namespace ChestiiRandom {
     class ChestiiRandom.MutableBoolean {
         + val : boolean
         + MutableBoolean()

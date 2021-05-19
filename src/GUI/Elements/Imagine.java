@@ -5,6 +5,9 @@ import SpriteSheet.ImageLoader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/*! \class Imagine
+    \brief Clasa care extined UI_Element. Reprezitna o imagine statica din UI.
+ */
 public class Imagine extends UI_Elemenent{
 
     private BufferedImage img = null;

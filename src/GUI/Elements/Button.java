@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+/*! \class Button
+    \brief Clasa care extined UI_Element si implementeaza Interactable. Reprezitna un buton pe care se poate da click.
+ */
 public class Button extends UI_Elemenent implements Interactable{
 
     private final String text;

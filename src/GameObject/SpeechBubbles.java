@@ -7,6 +7,9 @@ import SoundTrack.SoundManager;
 import javax.swing.*;
 import java.awt.*;
 
+/*! \class SpeechBubbles
+    \brief Clasa care extinde GameObject. Reprezinta textul din inceputul jocului care formeaza tutorialul.
+ */
 public class SpeechBubbles extends GameObject{
 
     private ImageIcon gif;
@@ -46,9 +49,15 @@ public class SpeechBubbles extends GameObject{
     }
 
     public void render(Graphics g) {
-        if(GameState.isFoundTreasure())
+        Image img ;
+        img = gif.getImage();
+        if(!triggered)
+        {
+            img.flush();
             return;
-        Image img = gif.getImage();
+        }
+        g.drawImage(img,triggerZone.x,triggerZone.y,(int)(img.getWidth(null) * scale),(int)(img.getHeight(null) * scale),null);
+
         img = gif.getImage();
         if(!triggered)
         {

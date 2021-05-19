@@ -6,7 +6,7 @@ import GameObject.GameObject;
 import GameStates.GameState;
 import Player.Player;
 import Player.States.*;
-import Room.*;
+import Room.Room;
 import SpriteSheet.MapSheet;
 
 import java.sql.*;
@@ -15,7 +15,6 @@ public class SQLite {
 
     private Connection c;
     private static SQLite instance = null;
-
 
     public static SQLite getInstance() {
         return instance;
@@ -42,8 +41,8 @@ public class SQLite {
             String statemant;
 
             statemant = "UPDATE gameState SET "
-            + "musicOn = ? , "
-            + "soundOn = ?";
+                        + "musicOn = ? , "
+                        + "soundOn = ?";
 
             PreparedStatement stm = c.prepareStatement(statemant);
 
@@ -207,10 +206,23 @@ public class SQLite {
         statemant = "SELECT * FROM scores";
         ResultSet scoreSet = altst.executeQuery(statemant);
 
-        GameState.load(set,scoreSet);
+        try {
+            GameState.load(set,scoreSet);
+        } catch (NotLoadedException e) {
+            GameState.loadDefault();
+            statemant = "DELETE FROM gameState";
+            Statement s = c.createStatement();
+            s.execute(statemant);
+            statemant = "INSERT INTO gameState (musicOn, soundOn) VALUES (?,?)";
+            PreparedStatement st = c.prepareStatement(statemant);
+
+            st.setString(1, GameState.isMusicOn() ? "1" : "0");
+            st.setString(2, GameState.isSoundOn() ? "1" : "0");
+            st.executeUpdate();
+        }
     }
 
-    public void loadGame(MapSheet map) throws SQLException {
+    public void loadGame(MapSheet map) throws SQLException, NotLoadedException {
 
         System.out.println("Loading...");
 
@@ -218,9 +230,12 @@ public class SQLite {
         Statement stm = c.createStatement();
         ResultSet set = stm.executeQuery(statemant);
 
-        GameState.setDiff(set.getInt("diff"));
-        GameState.setScore(set.getInt("score"));
-        GameState.setFoundTreasure(set.getBoolean("treasureFound"));
+        try {
+            GameState.loadGameState(set);
+        } catch (NotLoadedException e) {
+            GameState.CantLoadGame();
+            throw new NotLoadedException();
+        }
 
         statemant = "SELECT * FROM dungeon";
         Statement st1 = c.createStatement();
@@ -232,11 +247,22 @@ public class SQLite {
         Statement st3 = c.createStatement();
         ResultSet objSet = st3.executeQuery(statemant);
 
-        Dungeon.load(dungeonSet,roomSet,objSet, map);
+        try {
+            Dungeon.load(dungeonSet,roomSet,objSet, map);
+        } catch (NotLoadedException e) {
+            GameState.CantLoadGame();
+            throw new NotLoadedException();
+        }
 
         statemant = "SELECT * FROM player";
         set = stm.executeQuery(statemant);
-        Player.load(set);
+
+        try {
+            Player.load(set);
+        } catch (NotLoadedException e) {
+            GameState.CantLoadGame();
+            throw new NotLoadedException();
+        }
 
         st1.close();
         st2.close();

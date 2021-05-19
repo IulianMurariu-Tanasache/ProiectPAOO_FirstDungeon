@@ -4,6 +4,9 @@ import Enemies.Enemy;
 
 import java.awt.*;
 
+/*! \class Follow
+    \brief Clasa care extinde EnemyState si gestioneaza urmarirea jucatorului de catre inamici.
+ */
 public class Follow extends EnemyState{
 
     public Follow(Enemy enemy) {

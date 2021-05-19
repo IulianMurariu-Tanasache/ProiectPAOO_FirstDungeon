@@ -168,4 +168,10 @@ public abstract class Room {
     public void setConfig(int[][][] config) {
         this.config = config;
     }
+
+    public void clear() {
+        for(GameObject obj : objects){
+            remove(obj);
+        }
+    }
 }

@@ -5,17 +5,15 @@ import Game.Window;
 
 import java.awt.*;
 
+/*! \class LeaderboardState
+    \brief Clasa care extinde GameState. Reprezinta meniul care afiseaza topul scorurilor.
+ */
 public class LeaderboardState extends GameState{
-
-/*    public SettingsState() {
-        init();
-    }*/
 
     @Override
     public void init() {
         for(UI_Elemenent ui : LeaderboardUI)
             ui.setVisible(true);
-        //((Text)(LeaderboardUI.get(2))).setText(String.valueOf(score));
     }
 
     @Override

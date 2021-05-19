@@ -2,6 +2,9 @@ package ChestiiRandom;
 
 import java.awt.*;
 
+/*! \class ChestiiStatice
+    \brief Clasa care tine cateva constante utilizate in tot proiectul.
+ */
 public class ChestiiStatice {
 
     public static final Color mov = new Color(70,12,89);

@@ -5,6 +5,9 @@ import Game.Window;
 
 import java.awt.*;
 
+/*! \class MenuState
+    \brief Clasa care extinde GameState. Reprezinta meniul principal al jocului.
+ */
 public class MenuState extends GameState{
 
     @Override

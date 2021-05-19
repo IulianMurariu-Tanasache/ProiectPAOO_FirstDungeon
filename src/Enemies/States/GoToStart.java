@@ -4,6 +4,11 @@ import Enemies.Enemy;
 
 import java.awt.*;
 
+/*! \class GoToStart
+    \brief Clasa care extinde EnemyState si gestioneaza intoarcerea inamicilor la punctul lor de plecare.
+
+    Inamicii au o zona de patrulat si ei trebuie sa se intoarca in zona lor cand nu mai pot urmari jucatorul sau acesta iese din zona lor de urmarire.
+ */
 public class GoToStart extends EnemyState{
 
     public GoToStart(Enemy enemy) {

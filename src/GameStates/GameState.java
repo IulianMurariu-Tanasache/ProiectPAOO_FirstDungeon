@@ -7,13 +7,19 @@ import GUI.Elements.*;
 import Game.Game;
 import Game.Window;
 import Input.MouseListener;
-import SQLite.SQLite;
+import SQLite.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/*! \class GameState
+    \brief Clasa de baza pentru starile jocului. Este folosita pentru a retine detalii despre joc, a crea tot ce tine de UI si meniuri si de a gestiona starile jocului prin State.
+
+    Este singleton. Are 4 functii abstracte ce trebuiesc implementate de clasele derivate: init, render, tick, clearUI.
+ */
 public abstract class GameState {
 
     protected static GameState prev = null;
@@ -27,7 +33,7 @@ public abstract class GameState {
     protected static ArrayList<UI_Elemenent> GameUI = new ArrayList<>();
     protected static ArrayList<UI_Elemenent> SettingsUI = new ArrayList<>();
     protected static ArrayList<UI_Elemenent> LeaderboardUI = new ArrayList<>();
-    private static GameState instance = null;
+    protected static GameState instance = null;
     private static boolean musicOn;
     private static boolean soundOn;
     private static boolean running;
@@ -49,7 +55,7 @@ public abstract class GameState {
         return instance;
     }
 
-    public static void load(ResultSet set, ResultSet scoreSet) {
+    public static void load(ResultSet set, ResultSet scoreSet) throws NotLoadedException {
         try {
             musicOn = set.getBoolean("musicOn");
             soundOn = set.getBoolean("soundOn");
@@ -58,8 +64,30 @@ public abstract class GameState {
                 GameState.scores[scoreSet.getInt("pos")] = scoreSet.getInt("score");
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new NotLoadedException();
         }
+    }
+
+    public static void loadDefault() {
+        musicOn = false;
+        soundOn = false;
+        for(int s : scores)
+            s = 0;
+        System.out.println("Can't load. Loaded default!");
+    }
+
+    public static void loadGameState(ResultSet set) throws NotLoadedException {
+        try{
+            diff = set.getInt("diff");
+            score = set.getInt("score");
+            foundTreasure = set.getBoolean("treasureFound");
+        } catch (SQLException e) {
+            throw new NotLoadedException();
+        }
+    }
+
+    public static void CantLoadGame() {
+        JOptionPane.showMessageDialog(null, "Unfortunately, the game couldn't be loaded.", "InfoBox: " + "Loading failed", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void setInstance(Game game) {

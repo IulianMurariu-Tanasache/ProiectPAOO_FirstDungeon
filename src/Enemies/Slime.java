@@ -5,6 +5,9 @@ import SpriteSheet.Animation;
 
 import java.awt.*;
 
+/*! \class Slime
+    \brief Clasa care extinde Enemy. Reprezinta inamicul Slinos.
+ */
 public class Slime extends Enemy{
 
     public Slime(int x, int y, float scale, ID i) {

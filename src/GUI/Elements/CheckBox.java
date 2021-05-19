@@ -6,6 +6,9 @@ import GUI.Commands.CheckBoxCommand;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+/*! \class Button
+    \brief Clasa care extined UI_Element si implementeaza Interactable. Reprezitna un buton de bifat.
+ */
 public class CheckBox extends UI_Elemenent implements Interactable{
 
     private Text text;

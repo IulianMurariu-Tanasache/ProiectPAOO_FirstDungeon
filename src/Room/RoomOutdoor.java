@@ -1,6 +1,8 @@
 package Room;
 
 import ChestiiRandom.ChestiiStatice;
+import Enemies.Slime;
+import GameObject.ID;
 import GameObject.SpeechBubbles;
 import GameStates.GameState;
 
@@ -49,13 +51,14 @@ public class RoomOutdoor extends Room{
 
         if (GameState.getDiff() == 0) {
             if (type == 4) {
-                objects.add(new SpeechBubbles(20, 320, 300, 100, 0.32f, "Assets/SpeechBubbles/move_bubble.gif"));
-                objects.add(new SpeechBubbles(330, 320, 300, 100, 0.32f, "Assets/SpeechBubbles/jump_bubble.gif"));
-                objects.add(new SpeechBubbles(520, 150, 300, 100, 0.32f, "Assets/SpeechBubbles/stats_bubble.gif"));
+                //objects.add(new Slime(270,390,2.9f, ID.Enemy_Slime));
+                objects.add(new SpeechBubbles(20, 320, 260, 100, 0.32f, "Assets/SpeechBubbles/start_bubble.gif"));
+                objects.add(new SpeechBubbles(330, 320, 180, 100, 0.32f, "Assets/SpeechBubbles/jump_bubble.gif"));
+                objects.add(new SpeechBubbles(520, 150, 220, 100, 0.32f, "Assets/SpeechBubbles/stats_bubble.gif"));
             }
             if (type == 5) {
-                objects.add(new SpeechBubbles(50, 320, 300, 100, 0.32f, "Assets/SpeechBubbles/dash_bubble.gif"));
-                objects.add(new SpeechBubbles(430, 320, 400, 100, 0.32f, "Assets/SpeechBubbles/crouch_bubble.gif"));
+                objects.add(new SpeechBubbles(50, 320, 180, 100, 0.32f, "Assets/SpeechBubbles/dash_bubble.gif"));
+                objects.add(new SpeechBubbles(430, 320, 280, 100, 0.32f, "Assets/SpeechBubbles/crouch_bubble.gif"));
             }
         }
     }

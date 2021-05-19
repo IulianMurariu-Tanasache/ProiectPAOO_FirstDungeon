@@ -7,6 +7,9 @@ import SoundTrack.SoundManager;
 
 import java.awt.*;
 
+/*! \class Attack (EnemyState)
+    \brief Clasa care extinde EnemyState si gestioneaza atacul inamicilor.
+ */
 public class Attack extends EnemyState{
 
     private boolean canAttack;

@@ -6,6 +6,9 @@ import Game.Window;
 import java.awt.*;
 
 
+/*! \class GameWinStaet
+    \brief Clasa care extinde GameState. Reprezinta starea jocului atunci cand jucatorul castiga.
+ */
 public class GameWinState extends GameState{
 
     private final int timerConst = 120;

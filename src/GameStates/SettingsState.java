@@ -5,6 +5,9 @@ import Game.Window;
 
 import java.awt.*;
 
+/*! \class SettingsState
+    \brief Clasa care extinde GameState. Reprezinta meniul de setari.
+ */
 public class SettingsState extends GameState{
 
 /*    public SettingsState() {

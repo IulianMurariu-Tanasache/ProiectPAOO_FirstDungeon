@@ -9,6 +9,9 @@ import SpriteSheet.Animation;
 
 import java.awt.*;
 
+/*! \class Eye
+    \brief Clasa care extinde Enemy. Reprezinta inamicul Ochi de Ceapa.
+ */
 public class Eye extends Enemy{
 
     public Eye(int x, int y, float scale, ID i) {

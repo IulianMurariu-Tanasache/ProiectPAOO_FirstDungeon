@@ -11,6 +11,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/*! \class Comoara
+    \brief Clasa care extinde GameObject. Reprezinta comoara din ultima camera.
+ */
 public class Comoara extends GameObject{
 
     private Animation animation;

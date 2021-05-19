@@ -5,6 +5,7 @@ import Enemies.*;
 import GameObject.GameObject;
 import GameObject.ID;
 import GameObject.Inima;
+import GameStates.GameState;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -54,18 +55,18 @@ public class RoomInterior extends Room{
                             config[1][i + q][j + 1] = 12;
                     }
                 }
-                int toSpawn = new Random().nextInt(16);
-                if(i > 2 && j > 2 && j < dimX - 2 && (config[0][i][j-1] == 3 || config[1][i][j-1] == 10)  && (config[0][i][j] == 3 || config[1][i][j] == 10) && getBoundsOfTile(i - 1,j) == null && getBoundsOfTile(i - 1,j - 1) == null && getBoundsOfTile(i - 2,j) == null && getBoundsOfTile(i - 2,j - 1) == null) {
+                int toSpawn = new Random().nextInt(14);
+                if(i > 2 && j > 2 && i < dimY - 1 && j < dimX - 2 && (config[0][i][j-1] == 3 || config[1][i][j-1] == 10)  && (config[0][i][j] == 3 || config[1][i][j] == 10) && getBoundsOfTile(i - 1,j) == null && getBoundsOfTile(i - 1,j - 1) == null && getBoundsOfTile(i - 2,j) == null && getBoundsOfTile(i - 2,j - 1) == null && getBoundsOfTile(i - 1,j - 2) == null && getBoundsOfTile(i - 2,j - 2) == null) {
                     switch (toSpawn) {
-                        case 7 -> objects.add(new Scheletron(((j-1)) * ChestiiStatice.tileDimension + 20, ChestiiStatice.tileDimension * (i-1) - 22,1.6f, ID.Enemy_Skeleton));
-                        case 11 -> objects.add(new Goblin((j-1)*ChestiiStatice.tileDimension +20, ChestiiStatice.tileDimension*(i-1) + 1, 1.7f, ID.Enemy_Goblin));
-                        case 13 -> objects.add(new Ciuperca((j-1) * ChestiiStatice.tileDimension + 20, ChestiiStatice.tileDimension * (i-1) - 30,1.8f, ID.Enemy_Ciuperca));
-                        case 4 -> objects.add(new Slime((j-1)*ChestiiStatice.tileDimension+20, ChestiiStatice.tileDimension*(i-1) + 7, 2.9f,ID.Enemy_Slime));
-                        case 5 -> objects.add(new Eye((j-1)*ChestiiStatice.tileDimension+20, ChestiiStatice.tileDimension*(i-2) + 10, 1.5f,ID.Enemy_Eye));
+                        case 7 -> objects.add(new Scheletron((j-1) * ChestiiStatice.tileDimension + 10, ChestiiStatice.tileDimension * (i-1) - 18,1.6f, ID.Enemy_Skeleton));
+                        case 11 -> objects.add(new Goblin((j-1)*ChestiiStatice.tileDimension +10, ChestiiStatice.tileDimension*(i-1) - 2, 1.7f, ID.Enemy_Goblin));
+                        case 13 -> objects.add(new Ciuperca((j-1) * ChestiiStatice.tileDimension + 10, ChestiiStatice.tileDimension * (i-1) - 30,1.8f, ID.Enemy_Ciuperca));
+                        case 4 -> objects.add(new Slime((j-1)*ChestiiStatice.tileDimension+10, ChestiiStatice.tileDimension*(i-1) + 9, 2.9f,ID.Enemy_Slime));
+                        case 5 -> objects.add(new Eye((j-1)*ChestiiStatice.tileDimension+10, ChestiiStatice.tileDimension*(i-2) + 30, 1.5f,ID.Enemy_Eye));
                     }
 
                 }
-                if(i > 2 && j > 2 && j < dimX - 2 && i < dimY - 2 && getBoundsOfTile(i,j) == null && toSpawn == 5 && !inimaPeCamera)
+                if(i > 2 && j > 2 && j < dimX - 2 && i < dimY - 2 && getBoundsOfTile(i,j) == null && toSpawn == 5 && !inimaPeCamera && GameState.getDiff() == 0)
                 {
                     inimaPeCamera = true;
                     objects.add(0,new Inima((j) * ChestiiStatice.tileDimension, ChestiiStatice.tileDimension * (i) + 5, 2.8f, ID.Inima));

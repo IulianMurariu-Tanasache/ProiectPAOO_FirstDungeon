@@ -9,13 +9,16 @@ import Game.Window;
 import GameObject.GameObject;
 import GameObject.ID;
 import Player.Player;
-import SQLite.SQLite;
+import SQLite.*;
 import SpriteSheet.MapSheet;
 
 import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/*! \class GameplayState
+    \brief Clasa care extinde GameState. Reprezinta starea principala jocului atunci cand este jucat.
+ */
 public class GameplayState extends GameState{
 
     private Text scoreText;
@@ -24,13 +27,15 @@ public class GameplayState extends GameState{
         System.out.println("Am pacalit JVM");
     }
 
-    public GameplayState() {
+    public GameplayState() throws NotLoadedException {
         init();
         if(toLoad) {
             try {
                 SQLite.getInstance().loadGame(new MapSheet("dungeon"));
-            } catch (SQLException | IOException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException | IOException | NotLoadedException throwables) {
+               throw new NotLoadedException();
+            }finally {
+                toLoad = false;
             }
         }
         else {

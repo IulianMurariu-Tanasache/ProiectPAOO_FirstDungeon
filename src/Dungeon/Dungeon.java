@@ -10,6 +10,7 @@ import GameStates.GameWinState;
 import Room.Room;
 import Room.RoomInterior;
 import Room.RoomOutdoor;
+import SQLite.NotLoadedException;
 import SpriteSheet.MapSheet;
 
 import java.io.IOException;
@@ -18,6 +19,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*! \class Dungeon
+    \brief Clasa care se ocupa cu generarea si gestiunea intregii temnite.
+
+    Clasa se ocupa de generarea procedurala a intregii temnitei, dar nu a camerelor individuale. Are si functie de incarcare din SQL pentru a continua un joc deja niceput.
+    Este singleton.
+ */
 public class Dungeon {
 
     private Room[][] rooms;
@@ -34,27 +41,37 @@ public class Dungeon {
 
     }
 
-    public static void load(ResultSet dungeonSet,ResultSet roomSet,ResultSet objectsSet, MapSheet map) {
+    public static void load(ResultSet dungeonSet,ResultSet roomSet,ResultSet objectsSet, MapSheet map) throws NotLoadedException {
         try {
             Room.setSheet(map);
             instance = new Dungeon();
-            instance.dimX = dungeonSet.getInt("dimX");
-            instance.dimY = dungeonSet.getInt("dimY");
-            instance.outside = dungeonSet.getBoolean("outside");
-            instance.indexOut = dungeonSet.getInt("indexOut");
-            instance.cRow = dungeonSet.getInt("cRow");
-            instance.cColumn = dungeonSet.getInt("cColumn");
-            instance.out = new Room[2];
-            instance.out[0] = new RoomOutdoor (4);
-            instance.out[1] = new RoomOutdoor(5);
+            try {
+                instance.dimX = dungeonSet.getInt("dimX");
+                instance.dimY = dungeonSet.getInt("dimY");
+                if(instance.dimX == 0 || instance.dimY == 0)
+                    throw new NotLoadedException();
+                instance.outside = dungeonSet.getBoolean("outside");
+                instance.indexOut = dungeonSet.getInt("indexOut");
+                instance.cRow = dungeonSet.getInt("cRow");
+                instance.cColumn = dungeonSet.getInt("cColumn");
+                instance.out = new Room[2];
+                instance.out[0] = new RoomOutdoor(4);
+                instance.out[1] = new RoomOutdoor(5);
+            } catch (SQLException e) {
+                throw new NotLoadedException();
+            }
             roomSet.next();
             objectsSet.next();
             instance.rooms = new Room[instance.dimY][instance.dimX];
             for(int i = 0; i < instance.dimY; ++i)
                 for(int j = 0; j < instance.dimX; ++j) {
                     int room = i * (instance.dimX) + j;
-                    while(room > objectsSet.getInt("whatRoom"))
-                        objectsSet.next();
+                    try {
+                        while (room > objectsSet.getInt("whatRoom"))
+                            objectsSet.next();
+                    } catch (SQLException e) {
+                        System.out.println("ObjectsList done!");
+                    }
                     if(room == roomSet.getInt("whatRoom")) {
                         String[] con = roomSet.getString("conf").split(",");
                         int[][][] conf = new int[2][9][16];
@@ -175,8 +192,9 @@ public class Dungeon {
 
         rooms[i][j - 1] = new RoomInterior(tip, 0);
         rooms[i][j] = new RoomInterior(0,2);
+        rooms[i][j].clear();
         rooms[i][j].add(new Comoara(896,375,0.9f, ID.Comoara));
-        System.out.println(i + " " + j);
+        rooms[i][j].add(new SpeechBubbles(60, 320, 200, 100, 0.32f, "Assets/SpeechBubbles/attack_bubble.gif"));
 
         //tipuri de camera: 0 - stanga/dreapta; 1 - +jos; 2 - all; 3 - +sus
         //dir: 0 - jos, 1 - stanga, 2 - sus

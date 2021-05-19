@@ -3,6 +3,13 @@
 title __SQLITE's Class Diagram__\n
 
   namespace SQLite {
+    class SQLite.NotLoadedException {
+        + NotLoadedException()
+    }
+  }
+  
+
+  namespace SQLite {
     class SQLite.SQLite {
         - c : Connection
         {static} - instance : SQLite
@@ -11,6 +18,7 @@ title __SQLITE's Class Diagram__\n
         + loadGame()
         + loadGameState()
         + save()
+        + saveSetari()
         {static} + setInstance()
         - SQLite()
     }

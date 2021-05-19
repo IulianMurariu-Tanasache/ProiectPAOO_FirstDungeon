@@ -4,6 +4,9 @@ import Enemies.Enemy;
 
 import java.awt.*;
 
+/*! \class Patrol
+    \brief Clasa care extinde EnemyState si gestioneaza patrularea inamicilor intr-o anumita zona.
+ */
 public class Patrol extends EnemyState{
 
     public Patrol(Enemy enemy) {

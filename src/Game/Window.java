@@ -6,7 +6,7 @@ import java.awt.*;
 /*! \class Window
     \brief Clasa care genereaza fereastra jocului.
 
-    Se foloseste de JFrame.
+    Se foloseste de JFrame. Este singleton.
  */
 public class Window {
 

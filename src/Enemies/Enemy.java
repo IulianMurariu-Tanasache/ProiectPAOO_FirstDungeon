@@ -17,8 +17,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-;
+/*! \class Enemy
+    \brief Clasa abstracta care extinde GameObject si este baza pentru inamici.
 
+    Functia render trebuie implementata in orice clasa derivata.
+ */
 public abstract class Enemy extends GameObject{
 
     protected Animation currentAnimation;
@@ -101,7 +104,8 @@ public abstract class Enemy extends GameObject{
     public void tick() {
         Player player = Player.getInstance();
         playerBounds = player.getBounds();
-        playerBounds.x += + EnemyState.getDistanceToAttack();
+        playerBounds.x -= EnemyState.getDistanceToAttack() / 2;
+        playerBounds.width += EnemyState.getDistanceToAttack() / 2;
         if(playerBounds.intersects(getBounds()) && player.isAttacking())
         {
             health--;

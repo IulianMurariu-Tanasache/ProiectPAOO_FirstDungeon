@@ -4,6 +4,9 @@ import Game.Window;
 
 import java.awt.*;
 
+/*! \class DiffSelectState
+    \brief Clasa care extinde GameState. Reprezinta meniul de selectare al dificutatii.
+ */
 public class DiffSelectState extends GameState{
 
     @Override
