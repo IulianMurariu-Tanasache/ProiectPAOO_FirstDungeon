@@ -566,30 +566,30 @@ title FirstDungeon Diagramm\n
     }
   }
 
-  GUI.Commands.SoundOnCommand -[hidden]down-> GUI.Commands.SaveComand
-  GUI.Commands-[hidden]up->GameState
-  Player-[hidden]up->GUI.Elements
-  SpriteSheet -[hidden]up-> GUI.Commands
-  Enemies -[hidden]left-> GameObject
-  Enemies -[hidden]up-> GUI.Commands
-  Enemies -[hidden]left-> GUI.Elements
-  Enemies -[hidden]left-> SpriteSheet
-  Enemies -[hidden]down-> GameState
-  GameObject -[hidden]left-> Player
-  GameState-[hidden]left->ChestiiRandom
-  Player-[hidden]down->ChestiiRandom
-  Player-[hidden]up->java
-  GameState-[hidden]left->SQLite
-  GameObject -[hidden]right-> GUI.Elements
-  Enemies -[hidden]down-> GUI.Commands
-  GUI.Elements -[hidden]left-> Room
-  GUI.Elements -[hidden]left-> java.awt
-  GUI.Elements -[hidden]left-> GameState
-  GUI.Elements -[hidden]up-> GUI.Commands
-  Room -[hidden]--> SQLite
-  Room -[hidden]--> java.awt.event
-  java.lang -[hidden]--> SQLite
-  GUI.Elements -[hidden]up--> GameStates
+scale 1.9
+
+  GUI.Commands.SoundOnCommand -[hidden]down--> GUI.Commands.SaveComand
+  GUI.Commands--[hidden]up-->GameState
+  Player--[hidden]up-->GUI.Elements
+  SpriteSheet --[hidden]up--> GUI.Commands
+  SpriteSheet --[hidden]right--> Enemies
+  Enemies --[hidden]left--> GameObject
+  Enemies --[hidden]up--> GUI.Elements
+  Enemies --[hidden]left--> SpriteSheet
+  Enemies --[hidden]down--> GameState
+  GameObject--[hidden]left--> Player
+  GameState--[hidden]left-->ChestiiRandom
+  Player--[hidden]down-->ChestiiRandom
+  Player--[hidden]up-->java
+  GameState--[hidden]down-->SQLite
+  GameObject --[hidden]right--> GUI.Elements
+  Enemies --[hidden]down--> GUI.Commands
+  GUI.Elements --[hidden]left--> GameState
+  GUI.Elements --[hidden]up--> GUI.Commands
+  Room --[hidden]--> SQLite
+  Room --[hidden]--> java.awt.event
+  java.lang --[hidden]--> SQLite
+  GUI.Elements --[hidden]up--> GameStates
   Enemies.Ciuperca -up-|> Enemies.Enemy
   Enemies.Enemy -up-|> GameObject.GameObject
   Enemies.Enemy o-- SpriteSheet.Animation : currentAnimation

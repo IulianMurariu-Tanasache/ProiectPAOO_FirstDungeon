@@ -71,14 +71,13 @@ public abstract class Enemy extends GameObject{
 
     public Enemy(int x, int y, ID i) {
         super(x, y, i);
-        if(new Random().nextInt(2) == 0) {
+       /* if(new Random().nextInt(2) == 0) {
             facing = false;
             this.x = x + EnemyState.getDistanceToPatrol();
         }
-        else {
-            facing = true;
-            this.x = x;
-        }
+        else {*/
+        facing = true;
+        this.x = x;
         startX = x;
         inAnimation = new MutableBoolean();
         health = 3;

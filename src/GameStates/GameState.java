@@ -226,16 +226,21 @@ public abstract class GameState {
         deathPanel.add(idk);
 
         //panou Win
-        WinPanel = new Panou(332,70,360,375);
+        WinPanel = new Panou(270,200,520,160);
         WinPanel.setBackColor(ChestiiStatice.verzui);
         //GameUI.add(WinPanel);
 
-        title = new Text(380,130, "YOU WON!");
+        title = new Text(400,320, "YOU WON!");
         title.setSize(42);
         title.setTextColor(ChestiiStatice.mov);
         WinPanel.add(title);
 
-        idk = new Button(432,169,160,70,"START AGAIN", new ToDiffPanelCommand());
+        title = new Text(280,260, "CONGRATULATIONS!");
+        title.setSize(42);
+        title.setTextColor(ChestiiStatice.mov);
+        WinPanel.add(title);
+
+      /*  idk = new Button(432,169,160,70,"START AGAIN", new ToDiffPanelCommand());
         idk.setTextColor(Color.WHITE);
         idk.setBackColor(ChestiiStatice.verzui);
         mouseInput.add(idk);
@@ -245,7 +250,7 @@ public abstract class GameState {
         idk.setTextColor(Color.WHITE);
         idk.setBackColor(ChestiiStatice.verzui);
         mouseInput.add(idk);
-        WinPanel.add(idk);
+        WinPanel.add(idk);*/
 
         //GameUI.add(title);
 

@@ -24,7 +24,7 @@ public class KeyInput extends KeyAdapter {
     public void keyPressed(KeyEvent e)
     {
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_W) keys[KeyEnum.W.ordinal()] = true;
+       //if(key == KeyEvent.VK_W) keys[KeyEnum.W.ordinal()] = true;
         if(key == KeyEvent.VK_A) keys[KeyEnum.A.ordinal()] = true;
         if(key == KeyEvent.VK_D) keys[KeyEnum.D.ordinal()] = true;
         if(key == KeyEvent.VK_SPACE) keys[KeyEnum.SPACE.ordinal()] = true;
@@ -36,7 +36,7 @@ public class KeyInput extends KeyAdapter {
     public void keyReleased(KeyEvent e)
     {
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_W) keys[KeyEnum.W.ordinal()] = false;
+        //if(key == KeyEvent.VK_W) keys[KeyEnum.W.ordinal()] = false;
         if(key == KeyEvent.VK_A) keys[KeyEnum.A.ordinal()] = false;
         if(key == KeyEvent.VK_D) keys[KeyEnum.D.ordinal()] = false;
         if(key == KeyEvent.VK_SPACE) keys[KeyEnum.SPACE.ordinal()] = false;

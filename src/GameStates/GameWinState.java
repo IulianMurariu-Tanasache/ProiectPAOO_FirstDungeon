@@ -17,7 +17,11 @@ public class GameWinState extends GameState{
     @Override
     public void init() {
         timer = 0;
+        //menuBack.setVisible(true);
         WinPanel.setVisible(true);
+        if(diff == 1) {
+            score /= 2;
+        }
     }
 
 
@@ -28,6 +32,7 @@ public class GameWinState extends GameState{
         g.setColor(Color.WHITE);
         g.fillRect(0,0,Window.getInstance().getWidth(),Window.getInstance().getHeight());
 
+        //menuBack.render(g);
         for(UI_Elemenent ui : GameUI)
             ui.render(g);
         WinPanel.render(g);
@@ -42,6 +47,7 @@ public class GameWinState extends GameState{
 
     @Override
     public void clearUI() {
+        //menuBack.setVisible(false);
         WinPanel.setVisible(false);
     }
 }

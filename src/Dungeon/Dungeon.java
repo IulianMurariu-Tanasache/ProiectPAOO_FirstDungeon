@@ -147,7 +147,7 @@ public class Dungeon {
         int olddir = 1;
         cRow = i;
         cColumn = 0;
-
+        System.out.println(i + " " + j);
         //tipuri de camera: 0 - stanga/dreapta; 1 - +jos; 2 - all; 3 - +sus
         //dir: 0 - jos, 1 - stanga, 2 - sus
 
@@ -190,6 +190,7 @@ public class Dungeon {
             }
         }
 
+        System.out.println(i + " " + j);
         rooms[i][j - 1] = new RoomInterior(tip, 0);
         rooms[i][j] = new RoomInterior(0,2);
         rooms[i][j].clear();
