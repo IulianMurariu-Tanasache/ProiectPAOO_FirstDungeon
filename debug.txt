@@ -1,6 +1,0 @@
--score se pune prea multe ori
--daca ataci te pune in crouch
--continue strica tot jocu
--portile nu se deblocheaza
--portile se blocheaza prea repede cand urci
--ctrl+space zbori la infinit
