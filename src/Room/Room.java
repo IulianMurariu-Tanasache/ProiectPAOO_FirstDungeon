@@ -63,7 +63,7 @@ public abstract class Room {
                 GameState.setScore(GameState.getScore() - 5);
             objects.remove(toRemove.poll());
         }
-        if(isToBeLocked() && hasEnemies() && Player.getInstance().isArmed() && Player.getInstance().getX() < 900 && Player.getInstance().getX() > 100 && Player.getInstance().getY() < 500 && Player.getInstance().getY() > 100) {
+        if(isToBeLocked() && hasEnemies() && Player.getInstance().isArmed() && Player.getInstance().getX() < 700 && Player.getInstance().getX() > 100 && Player.getInstance().getY() < 500 && Player.getInstance().getY() > 100) {
             toBeLocked = false;
             isLocked = true;
             SoundManager.getSoundManager().play("gate.wav");

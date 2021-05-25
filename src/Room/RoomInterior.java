@@ -58,10 +58,10 @@ public class RoomInterior extends Room{
                 int toSpawn = new Random().nextInt(14);
                 if(i > 2 && j > 2 && i < dimY - 1 && j < dimX - 2 && (config[0][i][j-1] == 3 || config[1][i][j-1] == 10)  && (config[0][i][j] == 3 || config[1][i][j] == 10) && getBoundsOfTile(i - 1,j) == null && getBoundsOfTile(i - 1,j - 1) == null && getBoundsOfTile(i - 2,j) == null && getBoundsOfTile(i - 2,j - 1) == null && getBoundsOfTile(i - 1,j - 2) == null && getBoundsOfTile(i - 2,j - 2) == null) {
                     switch (toSpawn) {
-                        case 7 -> objects.add(new Scheletron((j-1) * ChestiiStatice.tileDimension + 10, ChestiiStatice.tileDimension * (i-1) - 18,1.6f, ID.Enemy_Skeleton));
+                        case 7 -> objects.add(new Scheletron((j-1) * ChestiiStatice.tileDimension + 10, ChestiiStatice.tileDimension * (i-1) - 20,1.6f, ID.Enemy_Skeleton));
                         case 11 -> objects.add(new Goblin((j-1)*ChestiiStatice.tileDimension +10, ChestiiStatice.tileDimension*(i-1) - 2, 1.7f, ID.Enemy_Goblin));
-                        case 13 -> objects.add(new Ciuperca((j-1) * ChestiiStatice.tileDimension + 10, ChestiiStatice.tileDimension * (i-1) - 30,1.8f, ID.Enemy_Ciuperca));
-                        case 4 -> objects.add(new Slime((j-1)*ChestiiStatice.tileDimension+10, ChestiiStatice.tileDimension*(i-1) + 9, 2.9f,ID.Enemy_Slime));
+                        case 13 -> objects.add(new Ciuperca((j-1) * ChestiiStatice.tileDimension + 10, ChestiiStatice.tileDimension * (i-1) - 31,1.8f, ID.Enemy_Ciuperca));
+                        case 4 -> objects.add(new Slime((j-1)*ChestiiStatice.tileDimension+10, ChestiiStatice.tileDimension*(i-1) + 7, 2.9f,ID.Enemy_Slime));
                         case 5 -> objects.add(new Eye((j-1)*ChestiiStatice.tileDimension+10, ChestiiStatice.tileDimension*(i-2) + 30, 1.5f,ID.Enemy_Eye));
                     }
 

@@ -25,7 +25,7 @@ public class Attack extends PlayerState{
             player.setWidth(22);
             player.setHeight(29);
             player.setAttacking(true);
-            return prev;
+            return new Idle();
         }
         return this;
     }

@@ -47,6 +47,7 @@ public class ScorePanel extends Panou{
                     textlist[j].setText((j+1) + ". Score: " + scores[j]);
                 }
                 scores[i] = GameState.getScore();
+                GameState.setScore(0);
                 textlist[i].setText((i+1) + ". Score: " + scores[i]);
                 return;
             }

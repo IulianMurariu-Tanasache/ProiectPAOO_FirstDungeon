@@ -18,7 +18,7 @@ public class Ciuperca extends Enemy{
         img = null;
         currentAnimation = new Animation(ciuperca_anim[animations_enemy_enum.walk]);
         attackTimer = 0;
-        height = (int) (40 * scale);
+        height = (int) (39 * scale);
         width = (int) (40 * scale);
     }
 
