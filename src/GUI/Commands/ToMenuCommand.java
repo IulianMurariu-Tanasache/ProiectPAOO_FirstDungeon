@@ -7,6 +7,7 @@ public class ToMenuCommand  implements Command{
 
     @Override
     public void execute() {
+        GameState.setScore(0);
         GameState.setNext(new MenuState());
     }
 }

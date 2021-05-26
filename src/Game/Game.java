@@ -23,13 +23,6 @@ import java.io.IOException;
  */
 public class Game extends Canvas implements Runnable {
 
-    /*
-     *
-     *  ATENTIUNE ! TASTA W VA FI FOLOSITA DOAR CAT TIMP JOCUL ESTE IN DEZVOLTARE. ESTE DOAR O MODALITATE DE TESTARE CARE VA FI SCOASA
-     *  IN RELEASE.
-     *
-     */
-
     private boolean isRunning = false;  /*!< Flag ce retine starea jocului: Ruleaza sau nu.*/
     private Thread music_thread;
 
